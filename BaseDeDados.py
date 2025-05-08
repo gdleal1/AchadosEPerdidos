@@ -12,7 +12,8 @@ CREATE TABLE usuarios (
     telefone INTEGER UNIQUE NOT NULL, 
     senha TEXT NOT NULL,
     nota_media INTEGER NOT NULL,
-    quantidade_notas INTEGER NOT NULL
+    quantidade_notas INTEGER NOT NULL,
+    cargo TEXT NOT NULL
 );
                
 CREATE TABLE mensagens (
