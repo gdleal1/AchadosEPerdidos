@@ -8,7 +8,7 @@ class SearchFrame(ck.CTkFrame):
         self.grid_columnconfigure((0,1,2,3,4), weight=1)
 
         # Title
-        self.title_label = ck.CTkLabel(self, text="Buscar Itens Perdidos", font=("Arial", 20,"bold"))
+        self.title_label = ck.CTkLabel(self, text="===================================================== Buscar Itens Perdidos =====================================================", font=("Arial", 20,"bold"))
         self.title_label.grid(row=0, column=0, columnspan=5,pady=(20, 10))
 
         # Search bar
@@ -29,7 +29,7 @@ class SearchFrame(ck.CTkFrame):
         # Date field
         self.date_label = ck.CTkLabel(self, text="Data da perda:")
         self.date_label.grid(row=2, column=3)
-        self.date_entry = DateEntry(self, date_pattern='dd/mm/yyyy', background='gray', foreground='gray')
+        self.date_entry = DateEntry(self, date_pattern='dd/mm/yyyy', background='gray', foreground='white')
         self.date_entry.grid(row=2, column=4,padx = (0,20),sticky="ew")
 
         # Search button
