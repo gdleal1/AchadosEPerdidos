@@ -7,6 +7,7 @@ class SearchFrame(ck.CTkFrame):
         super().__init__(master)
 
         self.grid_columnconfigure((0,1,2,3,4), weight=1)
+        self.grid_rowconfigure(4, weight=1)
 
         # Logo
         self.logoimage = ck.CTkImage(Image.open("gui/images/logo.png"),
@@ -32,11 +33,11 @@ class SearchFrame(ck.CTkFrame):
         self.category_combobox.grid(row=3, column=0, padx=(20, 0),sticky="ew")
         self.category_combobox.bind("<Key>", lambda e: "break") # Unable keyboard input
 
-        # Neighborhood field
-        self.neighborhood_label = ck.CTkLabel(self, text="Local/Bairro da perda:")
-        self.neighborhood_label.grid(row=3, column=1)
-        self.neighborhood_entry = ck.CTkEntry(self, placeholder_text="Ex: Centro")
-        self.neighborhood_entry.grid(row=3, column=2,sticky="ew")
+        # Location field
+        self.location_label = ck.CTkLabel(self, text="Local/Bairro da perda:")
+        self.location_label.grid(row=3, column=1)
+        self.location_entry = ck.CTkEntry(self, placeholder_text="Ex: Centro")
+        self.location_entry.grid(row=3, column=2,sticky="ew")
 
         # Date field
         self.date_label = ck.CTkLabel(self, text="Data da perda:")
@@ -56,6 +57,27 @@ class SearchFrame(ck.CTkFrame):
         if (category== "categorias"): # if no category is selected, set it to "todos"
             category = "todos"
         
-        neighborhood = self.neighborhood_entry.get().strip().lower()
+        location = self.location_entry.get().strip().lower()
         date = self.date_entry.get()
         item_name = self.search_entry.get().strip().lower()
+
+        # TO DO: Implementar busca no banco de dados
+
+        # Frame to show items found
+        self.results_frame = ck.CTkScrollableFrame(self)
+        self.results_frame.grid(row=4, column=0, columnspan=5, padx=20, pady=20, sticky="nsew")
+    
+    
+    def add_item_results_frame(self, name, location, date):
+        item_frame = ck.CTkFrame(self.results_frame, corner_radius=10)
+        item_frame.pack(fill="x", padx=10, pady=10)
+
+        item_name_label = ck.CTkLabel(item_frame, text=f"📦 {name.title()}", font=("Arial", 14, "bold"))
+        item_name_label.pack(anchor="w", padx=10, pady=(5, 0))
+
+        info_label = ck.CTkLabel(
+            item_frame,
+            text=f"Local/Bairro em que foi encontrado(a): {location.title()}  |  Data em que foi encontrado(a): {date}",
+            font=("Arial", 12)
+        )
+        info_label.pack(anchor="w", padx=10, pady=(0, 5))
