@@ -49,7 +49,7 @@ class ItemSearch:
         if data:
             # Convert input date (YYYYMMDD) to datetime and calculate end date (7 days later)
             try:
-                input_date = datetime.strptime(str(data), "%Y%m%d")
+                input_date = datetime.strptime(str(data), "%d/%m/%Y")
                 end_date = input_date + timedelta(days=7)
                 query += " AND ie.data BETWEEN ? AND ?"
                 params.extend([data, int(end_date.strftime("%Y%m%d"))])
