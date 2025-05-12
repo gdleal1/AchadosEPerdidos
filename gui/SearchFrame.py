@@ -1,6 +1,7 @@
 import customtkinter as ck
 from tkcalendar import DateEntry
 from PIL import Image
+from DataAcess.Request import ItemSearch
 
 class SearchFrame(ck.CTkFrame):
     def __init__(self, master):
@@ -20,7 +21,7 @@ class SearchFrame(ck.CTkFrame):
         self.title_frame_label.grid(row=1, column=0, columnspan=5,pady=(20, 10))
 
         # Search bar
-        self.search_entry = ck.CTkEntry(self, placeholder_text="Digite o nome do item ...")
+        self.search_entry = ck.CTkEntry(self, placeholder_text="Digite a descrição do item ...")
         self.search_entry.grid(row=2, column=0,columnspan=4,padx=20,pady=20,sticky="ew")
 
         # Search button
@@ -59,9 +60,13 @@ class SearchFrame(ck.CTkFrame):
         
         location = self.location_entry.get().strip().lower()
         date = self.date_entry.get()
-        item_name = self.search_entry.get().strip().lower()
+        item_description = self.search_entry.get().strip().lower()
+
 
         # TO DO: Implementar busca no banco de dados
+        searcher = ItemSearch("DB/AchadosEPerdidos.db")
+        results = searcher.search_item(item_description, category, location, date) # Date no formato DD/MM/YYYY
+
 
         # Frame to show items found
         self.results_frame = ck.CTkScrollableFrame(self)
