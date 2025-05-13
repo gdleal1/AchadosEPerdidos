@@ -1,4 +1,10 @@
 import sqlite3
+from datetime import datetime
+
+def yyyymmdd_to_unix(date_int):
+    date_str = str(date_int)
+    dt = datetime.strptime(date_str, "%Y%m%d")
+    return int(dt.timestamp())
 
 conn = sqlite3.connect("AchadosEPerdidos/AchadosEPerdidos.db")
 cursor = conn.cursor()
@@ -271,3 +277,62 @@ VALUES
     (20240329, 'ativo', 9, 9, 10, NULL),
     (20240330, 'finalizado', 10, 10, 1, 20240405);
 """)
+
+conn = sqlite3.connect("DB/AchadosEPerdidos.db")
+cursor = conn.cursor()
+
+# Atualizar itensEncontrados
+cursor.execute("SELECT code, data FROM itensEncontrados")
+rows = cursor.fetchall()
+for code, data in rows:
+    unix_time = yyyymmdd_to_unix(data)
+    cursor.execute("UPDATE itensEncontrados SET data = ? WHERE code = ?", (unix_time, code))
+
+# Atualizar itensProcurados
+cursor.execute("SELECT codp, data FROM itensProcurados")
+rows = cursor.fetchall()
+for codp, data in rows:
+    unix_time = yyyymmdd_to_unix(data)
+    cursor.execute("UPDATE itensProcurados SET data = ? WHERE codp = ?", (unix_time, codp))
+
+conn.commit()
+conn.close()
+
+conn = sqlite3.connect("DB/AchadosEPerdidos.db")
+cursor = conn.cursor()
+
+# Atualizar anuncios
+cursor.execute("SELECT coda, dataInicio FROM anuncios")
+rows = cursor.fetchall()
+for coda, dataInicio in rows:
+    unix_time = yyyymmdd_to_unix(dataInicio)
+    cursor.execute("UPDATE anuncios SET dataInicio = ? WHERE coda = ?", (unix_time, coda))
+cursor.execute("SELECT coda, dataFim FROM anuncios")
+rows = cursor.fetchall()
+for coda, dataFim in rows:
+    if (dataFim != None):
+        unix_time = yyyymmdd_to_unix(dataFim)
+        cursor.execute("UPDATE anuncios SET dataFim = ? WHERE coda = ?", (unix_time, coda))
+
+# Atualizar solicitacoes
+cursor.execute("SELECT cods, dataInicio FROM solicitacoes")
+rows = cursor.fetchall()
+for cods, dataInicio in rows:
+    unix_time = yyyymmdd_to_unix(dataInicio)
+    cursor.execute("UPDATE solicitacoes SET dataInicio = ? WHERE cods = ?", (unix_time, cods))
+cursor.execute("SELECT cods, dataFim FROM solicitacoes")
+rows = cursor.fetchall()
+for cods, dataFim in rows:
+    if (dataFim != None):
+        unix_time = yyyymmdd_to_unix(dataFim)
+        cursor.execute("UPDATE solicitacoes SET dataFim = ? WHERE cods = ?", (unix_time, cods))
+
+# Atualizar mensagens
+cursor.execute("SELECT codm, data FROM mensagens")
+rows = cursor.fetchall()
+for codm, data in rows:
+    unix_time = yyyymmdd_to_unix(data)
+    cursor.execute("UPDATE mensagens SET data = ? WHERE codm = ?", (unix_time, codm))
+
+conn.commit()
+conn.close()
