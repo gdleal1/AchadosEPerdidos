@@ -55,22 +55,25 @@ class SearchFrame(ck.CTkFrame):
     
     def search_button_action(self):
         category = self.category_combobox.get().strip().lower()
-        if (category== "categorias"): # if no category is selected, set it to "todos"
-            category = "todos"
+        if (category== "categorias" or category== "todos"): # if no category is selected, set it to None
+            category = None
         
         location = self.location_entry.get().strip().lower()
+        if (location == ""): # if no location is entered, set it to None
+            location = None
+        
         date = self.date_entry.get()
+        #date = None
+
         item_description = self.search_entry.get().strip().lower()
+        if (item_description == ""):
+            item_description = None
 
 
         # TO DO: Implementar busca no banco de dados
         searcher = ItemSearch("DB/AchadosEPerdidos.db")
         results = searcher.search_item(item_description, category, location, date) # Date no formato DD/MM/YYYY
-
-
-        # Frame to show items found
-        self.results_frame = ck.CTkScrollableFrame(self)
-        self.results_frame.grid(row=4, column=0, columnspan=5, padx=20, pady=20, sticky="nsew")
+        print(results)
     
     
     def add_item_results_frame(self, name, location, date):
