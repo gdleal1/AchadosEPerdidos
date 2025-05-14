@@ -50,9 +50,15 @@ class ItemSearch:
             # Convert input date (YYYYMMDD) to datetime and calculate end date (7 days later)
             try:
                 input_date = datetime.strptime(str(data), "%d/%m/%Y")
-                end_date = input_date + timedelta(days=7)
+                start_date = input_date.date()  # Get date object without time
+                end_date = (input_date + timedelta(days=7)).date()
+
+                # Format both dates consistently (either as strings or integers)
                 query += " AND ie.data BETWEEN ? AND ?"
-                params.extend([data, int(end_date.strftime("%Y%m%d"))])
+                params.extend([
+                    start_date.strftime("%Y%m%d"),  # or int(start_date.strftime("%Y%m%d"))
+                    end_date.strftime("%Y%m%d")     # must match the type of first parameter
+                ])
             except ValueError:
                 print("Invalid date format. Please use YYYYMMDD format.")
                 return []
@@ -74,7 +80,7 @@ if __name__ == "__main__":
     results = searcher.search_item(
         nome_item="jaqueta",
         local="Praça Central",
-        data=20240228
+        data="28/02/2024"
     )
     
     print("Found items:")
