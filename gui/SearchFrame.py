@@ -1,8 +1,9 @@
 import customtkinter as ck
 from tkcalendar import DateEntry
 from PIL import Image
-from DataAcess.Request import ItemSearch
-from DataAcess.Response import FoundItemProcessor
+from Aplication_functionality.SQLQueryBuilder import ItemSearch
+from Aplication_functionality.BuildResponse import FoundItemProcessor
+from gui_manager.InputVerification import InputVerification
 
 class SearchFrame(ck.CTkFrame):
     def __init__(self, master):
@@ -80,14 +81,14 @@ class SearchFrame(ck.CTkFrame):
         date = self.date_entry.get()
         if(date == ""): 
             date = None
+        
 
         item_description = self.search_entry.get().strip()
         if (item_description == ""):
             item_description = None
 
-        # Database search
-        searcher = ItemSearch("DB/AchadosEPerdidos.db")
-        search_results = searcher.search_item(item_description, category, location, date) 
+        input_verification = InputVerification()
+        search_results=input_verification.safe_search_and_process(item_description, category, location, date)
         processor = FoundItemProcessor(search_results)
 
         # Remove previous results
