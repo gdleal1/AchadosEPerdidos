@@ -1,7 +1,6 @@
 import customtkinter as ck
 from tkcalendar import DateEntry
 from PIL import Image
-from Aplication_functionality.SQLQueryBuilder import ItemSearch
 from Aplication_functionality.BuildResponse import FoundItemProcessor
 from gui_manager.InputVerification import InputVerification
 
