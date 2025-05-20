@@ -1,13 +1,14 @@
 import re
 from typing import Optional, List, Any
-from  Aplication_functionality.SQLQueryBuilder import ItemSearch  # Adjust import to your project structure
+from  Aplication_functionality.SQLQueryBuilder import ItemSearch  
+
+import re
+from typing import Optional, List, Any
 
 class InputVerification:
-    
-    def __init__(self):
-        pass
 
-    def sanitize_input(self,value: Optional[str]) -> Optional[str]:
+    @staticmethod
+    def sanitize_input(value: Optional[str]) -> Optional[str]:
         if value is None:
             return None
         if not isinstance(value, str):
@@ -19,15 +20,15 @@ class InputVerification:
             raise ValueError(f"Potentially unsafe input detected: {value}")
 
         return value.strip()  # Remove leading/trailing whitespace
-    
 
-    def safe_search_and_process(self,description: Optional[str], category: Optional[str], location: Optional[str], date: Optional[str]) -> List[Any]:
+    @staticmethod
+    def safe_search_and_process(description: Optional[str], category: Optional[str], location: Optional[str], date: Optional[str]) -> List[Any]:
         # Sanitize each input
         try:
-            description = self.sanitize_input(description)
-            category = self.sanitize_input(category)
-            location = self.sanitize_input(location)
-            date = self.sanitize_input(date)
+            description = InputVerification.sanitize_input(description)
+            category = InputVerification.sanitize_input(category)
+            location = InputVerification.sanitize_input(location)
+            date = InputVerification.sanitize_input(date)
         except ValueError as e:
             print(f"Input validation error: {e}")
             return []

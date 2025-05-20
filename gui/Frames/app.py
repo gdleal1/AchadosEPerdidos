@@ -1,5 +1,5 @@
 import customtkinter
-from gui.SearchFrame import SearchFrame
+from gui.Frames.SearchFrame import SearchFrame
 
 
 class App(customtkinter.CTk):

@@ -1,8 +1,7 @@
 import customtkinter as ck
 from tkcalendar import DateEntry
 from PIL import Image
-from Aplication_functionality.BuildResponse import FoundItemProcessor
-from gui_manager.InputVerification import InputVerification
+from gui.GUIComponents.SearchButton import SearchButton
 
 class SearchFrame(ck.CTkFrame):
     def __init__(self, master):
@@ -26,7 +25,7 @@ class SearchFrame(ck.CTkFrame):
         self.search_entry.grid(row=2, column=0,columnspan=5,padx=20,pady=20,sticky="ew")
 
         # Search button
-        self.search_button = ck.CTkButton(self, text="Buscar", command=self.search_button_action)
+        self.search_button = SearchButton(self, frame_ref=self)
         self.search_button.grid(row=2, column=5, padx=20, pady=20, sticky="ew")
 
         # Cartegory options
@@ -58,46 +57,11 @@ class SearchFrame(ck.CTkFrame):
         )
         self.no_date_checkbox.grid(row=3, column=5, padx=(0, 20))
 
-        # Placeholder: No results found
-        #self.no_results_label = ck.CTkLabel(self, text="🔍 Nenhum item encontrado", font=("Arial", 16), text_color="gray")
-        #self.no_results_label.grid(row=4, column=0, columnspan=5, pady=(40, 10))
 
         # Frame to display search results
         self.results_frame = ck.CTkScrollableFrame(self)
         self.results_frame.grid(row=4, column=0, columnspan=6, padx=20, pady=20, sticky="nsew")
     
-    def search_button_action(self):
-
-        # Handle empty/general inputs
-        category = self.category_combobox.get().strip()
-        if (category== "Categorias" or category== "Todos"): 
-            category = None
-        
-        location = self.location_entry.get().strip()
-        if (location == ""): 
-            location = None
-        
-        date = self.date_entry.get()
-        if(date == ""): 
-            date = None
-        
-
-        item_description = self.search_entry.get().strip()
-        if (item_description == ""):
-            item_description = None
-
-        input_verification = InputVerification()
-        search_results=input_verification.safe_search_and_process(item_description, category, location, date)
-        processor = FoundItemProcessor(search_results)
-
-        # Remove previous results
-        self.results_frame.destroy()
-        self.results_frame = ck.CTkScrollableFrame(self)
-        self.results_frame.grid(row=4, column=0, columnspan=6, padx=20, pady=20, sticky="nsew")
-
-        # Add items to the results frame
-        for item in processor.get_all_items():
-            self.add_item_results_frame(item['description'], item['location'], item['date'], item['category'])
         
     # Function to add searched items to the results frame
     def add_item_results_frame(self, description, location, date, category):
