@@ -1,7 +1,10 @@
 import customtkinter as ck
-from tkcalendar import DateEntry
-from PIL import Image
-from gui.GUIComponents.SearchButton import SearchButton
+from GUI.GUIComponents.SearchFrameComponents.SearchButton import SearchButton
+from GUI.GUIComponents.SearchFrameComponents.LogoImage import LogoImage
+from GUI.GUIComponents.SearchFrameComponents.SearchBar import SearchBar
+from GUI.GUIComponents.SearchFrameComponents.CategoryOptions import CategoryOptions
+from GUI.GUIComponents.SearchFrameComponents.LocationField import LocationField
+from GUI.GUIComponents.SearchFrameComponents.DateField import DateField
 
 class SearchFrame(ck.CTkFrame):
     def __init__(self, master):
@@ -11,41 +14,37 @@ class SearchFrame(ck.CTkFrame):
         self.grid_rowconfigure(4, weight=1)
 
         # Logo
-        self.logoimage = ck.CTkImage(Image.open("gui/images/logo.png"),
-                                  size=(480, 134))
-        self.logo_label = ck.CTkLabel(self, text="", image=self.logoimage)
-        self.logo_label.grid(row=0, column=0,columnspan=6, padx= 20, pady=10)
+        self.logo_label = LogoImage(self)
+        self.logo_label.grid(row=0, column=0, columnspan=6, padx=20, pady=10)
 
         # Frame title
         self.title_frame_label = ck.CTkLabel(self, text="===================================================== Buscar Itens Perdidos =====================================================", font=("Arial", 20))
         self.title_frame_label.grid(row=1, column=0, columnspan=6,pady=(20, 10))
 
         # Search bar
-        self.search_entry = ck.CTkEntry(self, placeholder_text="Digite a descrição do item ...")
-        self.search_entry.grid(row=2, column=0,columnspan=5,padx=20,pady=20,sticky="ew")
+        self.search_entry = SearchBar(self)
+        self.search_entry.grid(row=2, column=0, columnspan=5, padx=20, pady=20, sticky="ew")
 
         # Search button
         self.search_button = SearchButton(self, frame_ref=self)
         self.search_button.grid(row=2, column=5, padx=20, pady=20, sticky="ew")
 
         # Cartegory options
-        self.category_combobox = ck.CTkComboBox(self, values=["Todos", "Roupas", "Eletrônicos", "Documentos pessoais", "Acessórios e itens pessoais", "Materiais de escritório","Outros"])
-        self.category_combobox.set("Categorias")
-        self.category_combobox.grid(row=3, column=0, padx=(20, 0),sticky="ew")
-        self.category_combobox.bind("<Key>", lambda e: "break") # Unable keyboard input
+        self.category_combobox = CategoryOptions(self)
+        self.category_combobox.grid(row=3, column=0, padx=(20, 0), sticky="ew")
+        
 
         # Location field
         self.location_label = ck.CTkLabel(self, text="Local/Bairro da perda:")
         self.location_label.grid(row=3, column=1)
-        self.location_entry = ck.CTkEntry(self, placeholder_text="Ex: Centro")
+        self.location_entry = LocationField(self)
         self.location_entry.grid(row=3, column=2,sticky="ew")
 
         # Date field
         self.date_label = ck.CTkLabel(self, text="Data da perda:")
         self.date_label.grid(row=3, column=3)
-        self.date_entry = DateEntry(self, date_pattern='dd/mm/yyyy', background='gray', foreground='white')
+        self.date_entry = DateField(self)
         self.date_entry.grid(row=3, column=4,padx = (0,20),sticky="ew")
-        self.date_entry.bind("<Key>", lambda e: "break") # Unable keyboard input
 
         # CheckBox "Sem data"
         self.no_date_var = ck.BooleanVar()

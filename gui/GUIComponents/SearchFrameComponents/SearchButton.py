@@ -1,6 +1,6 @@
 import customtkinter as ck
-from Aplication_functionality.BuildResponse import FoundItemProcessor
-from gui_manager.InputVerification import InputVerification
+from AplicationFunctionality.BuildResponse import FoundItemProcessor
+from GUIManager.InputVerification import InputVerification
 
 
 class SearchButton(ck.CTkButton):

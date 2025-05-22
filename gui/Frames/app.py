@@ -1,5 +1,5 @@
 import customtkinter
-from gui.Frames.SearchFrame import SearchFrame
+from GUI.Frames.SearchFrame import SearchFrame
 
 
 class App(customtkinter.CTk):
@@ -10,8 +10,8 @@ class App(customtkinter.CTk):
         full_screen_width = self.winfo_screenwidth()
         full_screen_height = self.winfo_screenheight()
 
-        screen_width = int(full_screen_width * 0.8)   # 80% da largura
-        screen_height = int(full_screen_height * 0.7) # 70% da altura
+        screen_width = int(full_screen_width * 0.8)   
+        screen_height = int(full_screen_height * 0.7) 
 
         x_offset = (full_screen_width - screen_width) // 2
         y_offset = (full_screen_height - screen_height) // 2
