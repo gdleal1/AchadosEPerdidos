@@ -1,5 +1,6 @@
 import customtkinter
-from GUI.Frames.SearchFrame import SearchFrame
+from gui.Frames.SearchFrame import SearchFrame
+from gui.Frames.LoginFrame import LoginFrame
 
 
 class App(customtkinter.CTk):
@@ -24,4 +25,7 @@ class App(customtkinter.CTk):
 
         # Creating frames
         self.search_frame = SearchFrame(self)
-        self.search_frame.pack(fill="both", expand=True)
+        self.login_frame = LoginFrame(self)
+
+        #self.search_frame.pack(fill="both", expand=True)
+        self.login_frame.pack(fill="both", expand=True)
