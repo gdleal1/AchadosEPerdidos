@@ -5,18 +5,15 @@ class ItemSearch:
     def __init__(self, db_path):
         self.db_path = db_path
     
-    def search_item(self, nome_item=None, categoria=None, local=None, data=None):
+    def search_item(self, 
+                    nome_item:str=None, 
+                    categoria:str=None, 
+                    local:str=None, 
+                    data:str=None):
         """
         Search for items in the database based on the given criteria.
         If a date is provided, searches for items found within 7 days after that date.
         
-        Args:
-            nome_item (str): Name/description of the item (partial match)
-            categoria (str): Category name (exact match)
-            local (str): Location where item was found (partial match)
-            data (int): Date when item was found (YYYYMMDD format)
-                      Items found within 7 days after this date will be returned
-            
         Returns:
             list: List of matching items as dictionaries
         """
@@ -71,25 +68,66 @@ class ItemSearch:
         conn.close()
         return results
 
+    def verify_login(self, username:str, password:str) -> bool:
+        """
+        Verify user login credentials.
+            
+        Returns:
+            bool: True if credentials are valid, False otherwise
+        """
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        
+        query = "SELECT * FROM usuarios WHERE Nome = ? AND Senha = ?"
+        cursor.execute(query, (username, password))
+        
+        result = cursor.fetchone()
+        
+        conn.close()
+        return result is not None
+    
+    def insert_new_user(self, 
+                        username:str, 
+                        email:str,
+                        cellphone:str,
+                        password:str,) -> bool:
+        
+        """
+        Insert a new user into the database.
+        
+        Returns:
+        bool: True if user was successfully inserted, False if username already exists
+        """
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        try:
+            query = """
+            INSERT INTO usuarios (nome, email, telefone, senha, nota_media, quantidade_notas, cargo)
+            VALUES (?, ?, ?, ?, 0, 0, 'comum')
+            """
+            cursor.execute(query, (username, email, cellphone, password))
+            conn.commit()
+            return True
+        except sqlite3.IntegrityError:
+            print("Username already exists.")
+            return False
+        finally:
+            conn.close()
 
-# Example usage:
+#Example usage:
 if __name__ == "__main__":
-    searcher = ItemSearch("../DB/AchadosEPerdidos.db")  # Replace with your actual DB path
-    
-        # Search for the black jacket found in "Praça Central" around March 2024
-    results = searcher.search_item(
-        nome_item="jaqueta",
-        local="Praça Central",
-        data="28/02/2024"
-    )
-    
-    print("Found items:")
-    for item in results:
-        print(f"ID: {item['code']}")
-        print(f"Description: {item['descricao']}")
-        print(f"Category: {item['categoria']}")
-        print(f"Location: {item['local']}")
-        print(f"Date: {item['data']}")
-        print("-" * 30)
+    #check verify login
+    db_path = "Database/AchadosEPerdidos.db"
+    item_search = ItemSearch(db_path)
 
-    print(results)
+    username = "Ana Silva"
+    password = "senha123"
+
+    if item_search.verify_login(username, password):
+        print("Login successful!") #working properly
+    else:
+        print("Invalid username or password.") #oh nous :(
+
+    password = "newpassword123"
+    
+
