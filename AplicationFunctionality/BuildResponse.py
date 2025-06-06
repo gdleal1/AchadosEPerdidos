@@ -9,10 +9,10 @@ class FoundItemProcessor:
         for item in self.raw_data:
             processed = {
                 'id': item['code'],
-                'description': item['descricao'],
-                'category': item['categoria'],
+                'description': item['description'],
+                'category': item['category'],
                 'location': item['local'],
-                'date': self._format_date(item['data']),
+                'date': self._format_date(item['date']),
                 'status': 'found'  # Could be dynamic if your system tracks status
             }
             self.processed_items.append(processed)
@@ -49,10 +49,10 @@ if __name__ == "__main__":
     # Simulated database response
     db_response = [{
         'code': 1,
-        'descricao': 'Jaqueta preta encontrada',
-        'categoria': 'Roupas',
+        'description': 'Jaqueta preta encontrada',
+        'category': 'Roupas',
         'local': 'Praça Central',
-        'data': 20240301
+        'date': 20240301
     }]
 
     # Process the data

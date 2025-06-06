@@ -6,10 +6,10 @@ class ItemSearch:
         self.db_path = db_path
     
     def search_item(self, 
-                    nome_item:str=None, 
-                    categoria:str=None, 
+                    item_name:str=None, 
+                    category:str=None, 
                     local:str=None, 
-                    data:str=None):
+                    date:str=None):
         """
         Search for items in the database based on the given criteria.
         If a date is provided, searches for items found within 7 days after that date.
@@ -22,36 +22,36 @@ class ItemSearch:
         
         # Base query
         query = """
-        SELECT ie.code, ie.descricao, c.nome as categoria, ie.local, ie.data
-        FROM itensEncontrados ie
-        JOIN categorias c ON ie.codc = c.codc
+        SELECT ie.code, ie.description, c.name as category, ie.local, ie.date
+        FROM foundItems ie
+        JOIN categories c ON ie.codc = c.codc
         WHERE 1=1
         """
         
         params = []
         
         # Add conditions based on provided parameters
-        if nome_item:
-            query += " AND ie.descricao LIKE ?"
-            params.append(f"%{nome_item}%")
+        if item_name:
+            query += " AND ie.description LIKE ?"
+            params.append(f"%{item_name}%")
         
-        if categoria:
-            query += " AND c.nome = ?"
-            params.append(categoria)
+        if category:
+            query += " AND c.name = ?"
+            params.append(category)
         
         if local:
             query += " AND ie.local LIKE ?"
             params.append(f"%{local}%")
         
-        if data:
+        if date:
             # Convert input date (YYYYMMDD) to datetime and calculate end date (7 days later)
             try:
-                input_date = datetime.strptime(str(data), "%d/%m/%Y")
+                input_date = datetime.strptime(str(date), "%d/%m/%Y")
                 start_date = input_date.date()  # Get date object without time
                 end_date = (input_date + timedelta(days=7)).date()
 
                 # Format both dates consistently (either as strings or integers)
-                query += " AND ie.data BETWEEN ? AND ?"
+                query += " AND ie.date BETWEEN ? AND ?"
                 params.extend([
                     start_date.strftime("%Y%m%d"),  # or int(start_date.strftime("%Y%m%d"))
                     end_date.strftime("%Y%m%d")     # must match the type of first parameter
@@ -78,7 +78,7 @@ class ItemSearch:
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
         
-        query = "SELECT * FROM usuarios WHERE Nome = ? AND Senha = ?"
+        query = "SELECT * FROM users WHERE name = ? AND password = ?"
         cursor.execute(query, (username, password))
         
         result = cursor.fetchone()
@@ -102,7 +102,7 @@ class ItemSearch:
         cursor = conn.cursor()
         try:
             query = """
-            INSERT INTO usuarios (nome, email, telefone, senha, nota_media, quantidade_notas, cargo)
+            INSERT INTO usuarios (nome, email, cellphone, password, average_rating, rating_count, role)
             VALUES (?, ?, ?, ?, 0, 0, 'comum')
             """
             cursor.execute(query, (username, email, cellphone, password))

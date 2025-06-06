@@ -1,121 +1,119 @@
 import sqlite3
 
-conn = sqlite3.connect("DB/AchadosEPerdidos.db")
+conn = sqlite3.connect("Database/AchadosEPerdidos.db")
 cursor = conn.cursor()
 
 # Create a sample table
 cursor.executescript("""
-CREATE TABLE usuarios (
+CREATE TABLE users (
     codu INTEGER PRIMARY KEY AUTOINCREMENT,
-    nome TEXT NOT NULL,
+    name TEXT NOT NULL,
     email TEXT UNIQUE NOT NULL,
-    telefone INTEGER UNIQUE NOT NULL, 
-    senha TEXT NOT NULL,
-    nota_media INTEGER NOT NULL,
-    quantidade_notas INTEGER NOT NULL,
-    cargo TEXT NOT NULL
+    cellphone INTEGER UNIQUE NOT NULL, 
+    password TEXT NOT NULL,
+    average_rating INTEGER NOT NULL,
+    rating_count INTEGER NOT NULL,
+    role TEXT NOT NULL
 );
                
-CREATE TABLE mensagens (
-    codm INTEGER PRIMARY KEY AUTOINCREMENT,
-    conteudo TEXT NOT NULL,
-    remetente INTEGER NOT NULL,
-    destinatario INTEGER NOT NULL,
-    data INTEGER NOT NULL,
-    FOREIGN KEY (remetente) REFERENCES usuarios(codu),
-    FOREIGN KEY (destinatario) REFERENCES usuarios(codu)
-);
-               
-CREATE TABLE denuncias (
+CREATE TABLE denounces (
     codd INTEGER PRIMARY KEY AUTOINCREMENT,
-    descricao TEXT NOT NULL,
-    denunciador INTEGER NOT NULL,
-    denunciado INTEGER NOT NULL,
-    FOREIGN KEY (denunciador) REFERENCES usuarios(codu),
-    FOREIGN KEY (denunciado) REFERENCES usuarios(codu)
-);
-               
-CREATE TABLE categorias (
-    codc INTEGER PRIMARY KEY,
-    nome TEXT NOT NULL UNIQUE
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    denouncer INTEGER NOT NULL,
+    denounced INTEGER NOT NULL,
+    FOREIGN KEY (denouncer) REFERENCES users(codu),
+    FOREIGN KEY (denounced) REFERENCES users(codu)
 );
 
-CREATE TABLE itensEncontrados (
+CREATE TABLE denouncesImages (
+    coddi INTEGER PRIMARY KEY AUTOINCREMENT,
+    path TEXT NOT NULL,
+    codd INTEGER NOT NULL,
+    FOREIGN KEY (codd) REFERENCES denounces(codd)
+);
+               
+CREATE TABLE categories (
+    codc INTEGER PRIMARY KEY,
+    name TEXT NOT NULL UNIQUE
+);
+
+CREATE TABLE foundItems (
     code INTEGER PRIMARY KEY AUTOINCREMENT,
     codu INTEGER NOT NULL,
-    data INTEGER NOT NULL,
+    date INTEGER NOT NULL,
     codc INTEGER NOT NULL,
-    descricao TEXT NOT NULL,
+    description TEXT NOT NULL,
     local TEXT NOT NULL,
-    FOREIGN KEY (codu) REFERENCES usuarios(codu),
-    FOREIGN KEY (codc) REFERENCES categorias(codc)
+    FOREIGN KEY (codu) REFERENCES users(codu),
+    FOREIGN KEY (codc) REFERENCES categories(codc)
 );  
                
-CREATE TABLE palavrasChaveItensEncontrados(
+CREATE TABLE foundItemsKeywords(
     codpce INTEGER PRIMARY KEY AUTOINCREMENT,
-    termo TEXT NOT NULL,
+    searchTerm TEXT NOT NULL,
     code INTEGER NOT NULL,
-    FOREIGN KEY (code) REFERENCES itensEncontrados(code)
+    FOREIGN KEY (code) REFERENCES foundItems(code)
 );
                
-CREATE TABLE imagensItensEncontrados(
+CREATE TABLE foundItemsImages(
     codie INTEGER PRIMARY KEY AUTOINCREMENT,
     path TEXT NOT NULL,
     code INTEGER NOT NULL,
-    FOREIGN KEY (code) REFERENCES itensEncontrados(code)
+    FOREIGN KEY (code) REFERENCES foundItems(code)
 );
 
-CREATE TABLE itensProcurados (
+CREATE TABLE wantedItems (
     codp INTEGER PRIMARY KEY AUTOINCREMENT,
     codu INTEGER NOT NULL,
-    data INTEGER NOT NULL,
+    date INTEGER NOT NULL,
     codc INTEGER NOT NULL,
-    descricao TEXT NOT NULL,
+    description TEXT NOT NULL,
     local TEXT NOT NULL,
-    recompensaFinanceira INTEGER NOT NULL,
-    recompensaSimbolica TEXT,
-    FOREIGN KEY (codu) REFERENCES usuarios(codu),
-    FOREIGN KEY (codc) REFERENCES categorias(codc)
+    financialReward INTEGER NOT NULL,
+    symbolicReward TEXT,
+    FOREIGN KEY (codu) REFERENCES users(codu),
+    FOREIGN KEY (codc) REFERENCES categories(codc)
 );  
                
-CREATE TABLE palavrasChaveItensProcurados(
+CREATE TABLE wantedItemsKeywords(
     codpce INTEGER PRIMARY KEY AUTOINCREMENT,
-    termo TEXT NOT NULL,
+    searchTerm TEXT NOT NULL,
     codp INTEGER NOT NULL,
-    FOREIGN KEY (codp) REFERENCES itensProcurados(codp)
+    FOREIGN KEY (codp) REFERENCES wantedItems(codp)
 );
                
-CREATE TABLE imagensItensProcurados(
+CREATE TABLE wantedItemsImages(
     codie INTEGER PRIMARY KEY AUTOINCREMENT,
     path TEXT NOT NULL,
     codp INTEGER NOT NULL,
-    FOREIGN KEY (codp) REFERENCES itensProcurados(codp)
+    FOREIGN KEY (codp) REFERENCES wantedItems(codp)
 );  
 
-CREATE TABLE anuncios (
+CREATE TABLE announcements (
     coda INTEGER PRIMARY KEY AUTOINCREMENT,
-    dataInicio INTEGER NOT NULL,
+    startDate INTEGER NOT NULL,
     status TEXT NOT NULL,
     code INTEGER NOT NULL,
-    encontrou INTEGER NOT NULL,
-    dono INTEGER,
-    dataFim INTEGER,
-    FOREIGN KEY (code) REFERENCES itensEncontrados(code),
-    FOREIGN KEY (encontrou) REFERENCES usuarios(codu),   
-    FOREIGN KEY (dono) REFERENCES usuarios(codu)         
+    finder INTEGER NOT NULL,
+    owner INTEGER,
+    endDate INTEGER,
+    FOREIGN KEY (code) REFERENCES foundItems(code),
+    FOREIGN KEY (finder) REFERENCES users(codu),   
+    FOREIGN KEY (owner) REFERENCES users(codu)         
 );
 
-CREATE TABLE solicitacoes (
+CREATE TABLE requests (
     cods INTEGER PRIMARY KEY AUTOINCREMENT,
-    dataInicio INTEGER NOT NULL,
+    startDate INTEGER NOT NULL,
     status TEXT NOT NULL,
     codp INTEGER NOT NULL,
-    dono INTEGER NOT NULL,
-    encontrou INTEGER,
-    dataFim INTEGER,
-    FOREIGN KEY (codp) REFERENCES itensProcurados(codp),
-    FOREIGN KEY (encontrou) REFERENCES usuarios(codu),   
-    FOREIGN KEY (dono) REFERENCES usuarios(codu)       
+    owner INTEGER NOT NULL,
+    finder INTEGER,
+    endDate INTEGER,
+    FOREIGN KEY (codp) REFERENCES wantedItems(codp),
+    FOREIGN KEY (finder) REFERENCES users(codu),   
+    FOREIGN KEY (owner) REFERENCES users(codu)       
 );                                
 """)
 
