@@ -1,11 +1,11 @@
 import customtkinter as ck
-from gui.GUIComponents.SharedComponents.LogoImage import LogoImage
-from gui.GUIComponents.LoginRegisterFrameComponents.EmailEntry import EmailEntry
-from gui.GUIComponents.LoginRegisterFrameComponents.PasswordEntry import PasswordEntry
-from gui.GUIComponents.LoginRegisterFrameComponents.LoginButton import LoginButton
-from gui.GUIComponents.LoginRegisterFrameComponents.NameEntry import NameEntry
-from gui.GUIComponents.LoginRegisterFrameComponents.CellphoneEntry import CellphoneEntry
-from gui.GUIComponents.LoginRegisterFrameComponents.RegisterButton import RegisterButton
+from GUI.GUIComponents.SharedComponents.LogoImage import LogoImage
+from GUI.GUIComponents.LoginRegisterFrameComponents.EmailEntry import EmailEntry
+from GUI.GUIComponents.LoginRegisterFrameComponents.PasswordEntry import PasswordEntry
+from GUI.GUIComponents.LoginRegisterFrameComponents.LoginButton import LoginButton
+from GUI.GUIComponents.LoginRegisterFrameComponents.NameEntry import NameEntry
+from GUI.GUIComponents.SharedComponents.CellphoneEntry import CellphoneEntry
+from GUI.GUIComponents.LoginRegisterFrameComponents.RegisterButton import RegisterButton
 
 
 class LoginRegisterFrame(ck.CTkFrame):

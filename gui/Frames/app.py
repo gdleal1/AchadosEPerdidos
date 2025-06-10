@@ -1,6 +1,7 @@
 import customtkinter
-from gui.Frames.SearchFrame import SearchFrame
-from gui.Frames.LoginRegisterFrame import LoginRegisterFrame
+from GUI.Frames.SearchFrame import SearchFrame
+from GUI.Frames.LoginRegisterFrame import LoginRegisterFrame
+from GUI.Frames.AnnounceFrame import AnnounceFrame
 
 
 class App(customtkinter.CTk):
@@ -26,8 +27,10 @@ class App(customtkinter.CTk):
         # Creating frames
         self.search_frame = SearchFrame(self)
         self.login_frame = LoginRegisterFrame(self,self.login_to_search_frame)
+        self.announce_frame = AnnounceFrame(self)
 
-        self.login_frame.pack(fill="both", expand=True)
+        self.announce_frame.pack(fill="both", expand=True)
+        #self.login_frame.pack(fill="both", expand=True)
 
     # Function to switch from login frame to search frame
     def login_to_search_frame(self):

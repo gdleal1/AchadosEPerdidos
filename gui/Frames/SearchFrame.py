@@ -1,10 +1,10 @@
 import customtkinter as ck
-from gui.GUIComponents.SearchFrameComponents.SearchButton import SearchButton
-from gui.GUIComponents.SharedComponents.LogoImage import LogoImage
-from gui.GUIComponents.SearchFrameComponents.SearchBar import SearchBar
-from gui.GUIComponents.SearchFrameComponents.CategoryOptions import CategoryOptions
-from gui.GUIComponents.SearchFrameComponents.LocationField import LocationField
-from gui.GUIComponents.SearchFrameComponents.DateField import DateField
+from GUI.GUIComponents.SearchFrameComponents.SearchButton import SearchButton
+from GUI.GUIComponents.SharedComponents.LogoImage import LogoImage
+from GUI.GUIComponents.SearchFrameComponents.SearchBar import SearchBar
+from GUI.GUIComponents.SharedComponents.CategoryOptions import CategoryOptions
+from GUI.GUIComponents.SharedComponents.LocationField import LocationField
+from GUI.GUIComponents.SharedComponents.DateField import DateField
 
 class SearchFrame(ck.CTkFrame):
     def __init__(self, master):
