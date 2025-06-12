@@ -29,8 +29,8 @@ class App(customtkinter.CTk):
         self.login_frame = LoginRegisterFrame(self,self.login_to_search_frame)
         self.announce_frame = AnnounceFrame(self)
 
-        self.announce_frame.pack(fill="both", expand=True)
-        #self.login_frame.pack(fill="both", expand=True)
+        #self.announce_frame.pack(fill="both", expand=True)
+        self.login_frame.pack(fill="both", expand=True)
 
     # Function to switch from login frame to search frame
     def login_to_search_frame(self):
