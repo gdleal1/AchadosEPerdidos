@@ -6,11 +6,13 @@ class CategoryOptions(ck.CTkComboBox):
             master,
             values=[
                 "Todos",
-                "Roupas",
+                "Vestuário",
                 "Eletrônicos",
-                "Documentos pessoais",
-                "Acessórios e itens pessoais",
+                "Documentos",
+                "Acessórios",
                 "Materiais de escritório",
+                "Materiais escolares",
+                "Chaves",
                 "Outros"
             ],
             **kwargs

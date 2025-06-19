@@ -5,9 +5,10 @@ from GUI.GUIComponents.SearchFrameComponents.SearchBar import SearchBar
 from GUI.GUIComponents.SharedComponents.CategoryOptions import CategoryOptions
 from GUI.GUIComponents.SharedComponents.LocationField import LocationField
 from GUI.GUIComponents.SharedComponents.DateField import DateField
+from GUI.GUIComponents.SharedComponents.BackButton import BackButton
 
 class SearchFrame(ck.CTkFrame):
-    def __init__(self, master):
+    def __init__(self, master, switch_to_login_frame):
         super().__init__(master)
 
         self.grid_columnconfigure((0,1,2,3,4,5), weight=1)
@@ -15,7 +16,11 @@ class SearchFrame(ck.CTkFrame):
 
         # Logo
         self.logo_label = LogoImage(self)
-        self.logo_label.grid(row=0, column=0, columnspan=6, padx=20, pady=10)
+        self.logo_label.grid(row=0, column=1, columnspan=4, padx=20, pady=10, sticky="ew")
+
+        # Back button
+        self.back_button = BackButton(self, frame_ref=self, switch_to_previous_frame=switch_to_login_frame)
+        self.back_button.grid(row=0, column=0, padx=20, pady=10, sticky="w")
 
         # Frame title
         self.title_frame_label = ck.CTkLabel(self, text="===================================================== Buscar Itens Perdidos =====================================================", font=("Arial", 20))

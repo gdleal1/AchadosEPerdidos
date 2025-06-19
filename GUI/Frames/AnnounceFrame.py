@@ -7,9 +7,10 @@ from GUI.GUIComponents.SharedComponents.CellphoneEntry import CellphoneEntry
 from GUI.GUIComponents.AnnounceFrameComponents.FullItemDescriptionText import FullItemDescriptionText
 from GUI.GUIComponents.AnnounceFrameComponents.ImageSelector import ImageSelector
 from GUI.GUIComponents.AnnounceFrameComponents.AnnounceButton import AnnounceButton
+from GUI.GUIComponents.SharedComponents.BackButton import BackButton
 
 class AnnounceFrame(ck.CTkFrame):
-    def __init__(self, master):
+    def __init__(self, master, switch_to_search_frame):
         super().__init__(master)
 
         self.grid_columnconfigure((0,1,2,3,4), weight=1)
@@ -17,7 +18,11 @@ class AnnounceFrame(ck.CTkFrame):
         
         # Logo
         self.logo_label = LogoImage(self)
-        self.logo_label.grid(row=0, columnspan=5, padx=20, pady=40)
+        self.logo_label.grid(row=0, column = 1, columnspan=3, padx=20, pady=40)
+
+        # Back button
+        self.back_button = BackButton(self, frame_ref=self, switch_to_previous_frame=switch_to_search_frame)
+        self.back_button.grid(row=0, column=0, padx=20, pady=10, sticky="w")
 
         # Announce label
         self.title_frame_label = ck.CTkLabel(self, text="===================================== Anunciar Item Encontrado =====================================", font=("Arial", 25))
