@@ -6,10 +6,12 @@ from GUI.GUIComponents.SharedComponents.CategoryOptions import CategoryOptions
 from GUI.GUIComponents.SharedComponents.LocationField import LocationField
 from GUI.GUIComponents.SharedComponents.DateField import DateField
 from GUI.GUIComponents.SharedComponents.BackButton import BackButton
+from GUI.Frames.ItemFrame import ItemFrame
 
 class SearchFrame(ck.CTkFrame):
     def __init__(self, master, switch_to_login_frame):
         super().__init__(master)
+        self.master = master
 
         self.grid_columnconfigure((0,1,2,3,4,5), weight=1)
         self.grid_rowconfigure(4, weight=1)
@@ -69,18 +71,19 @@ class SearchFrame(ck.CTkFrame):
         
     # Function to add searched items to the results frame
     def add_item_results_frame(self, description, location, date, category):
-        item_frame = ck.CTkFrame(self.results_frame, corner_radius=10)
-        item_frame.pack(fill="x", padx=10, pady=10)
-
-        item_name_label = ck.CTkLabel(item_frame, text=f"📦 {description.title()}", font=("Arial", 14, "bold"))
-        item_name_label.pack(anchor="w", padx=10, pady=(5, 0))
-
-        info_label = ck.CTkLabel(
-            item_frame,
-            text=f"Local: {location.title()}  |  Data: {date} |  Categoria: {category}",
-            font=("Arial", 12)
+        item_data = {
+            'description': description,
+            'location': location,
+            'date': date,
+            'category': category
+        }
+        
+        # Create and add the item frame to results
+        ItemFrame(
+            master=self.results_frame,
+            item_data=item_data,
+            click_callback=self.master.search_to_item_frame
         )
-        info_label.pack(anchor="w", padx=10, pady=(0, 5))
     
     # Function to toggle the state of the date entry field when the checkbox is checked/unchecked
     def toggle_date_entry(self):
