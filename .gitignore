@@ -1,9 +1,3 @@
 venv
-AplicationFunctionality/__pycache__/
-gui/__pycache__/
-gui/Frames/__pycache__/
-gui/GUIComponents/__pycache__/
-gui/GUIComponents/LoginRegisterFrameComponents/__pycache__/
-gui/GUIComponents/SearchFrameComponents/__pycache__/
-gui/GUIComponents/SharedComponents/__pycache__/
-GUIManager/__pycache__/
+__pycache__/
+**/__pycache__/
