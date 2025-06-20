@@ -68,6 +68,48 @@ class ItemSearch:
         conn.close()
         return results
 
+    def get_item_image_paths(self, item_code:int) -> list:
+        """
+        Retrieve image paths for a specific item based on its code.
+        
+        Returns:
+            list: List of image paths
+        """
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        
+        query = "SELECT path FROM foundItemsImages WHERE code = ?"
+        cursor.execute(query, (item_code,))
+        
+        image_paths = [row[0] for row in cursor.fetchall()]
+        
+        conn.close()
+        return image_paths
+
+    def get_user_info(self, codu:int) -> dict:
+        """
+        Retrieve user information based on user ID.
+        
+        Returns:
+            dict: User information as a dictionary
+        """
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        
+        query = "SELECT * FROM users WHERE codu = ?"
+        cursor.execute(query, (codu,))
+        
+        row = cursor.fetchone()
+        
+        if row:
+            columns = [column[0] for column in cursor.description]
+            user_info = dict(zip(columns, row))
+        else:
+            user_info = {}
+        
+        conn.close()
+        return user_info
+
     def verify_login(self, username:str, password:str) -> bool:
         """
         Verify user login credentials.
@@ -102,7 +144,7 @@ class ItemSearch:
         cursor = conn.cursor()
         try:
             query = """
-            INSERT INTO usuarios (nome, email, cellphone, password, average_rating, rating_count, role)
+            INSERT INTO usuarios (name, email, cellphone, password, average_rating, rating_count, role)
             VALUES (?, ?, ?, ?, 0, 0, 'comum')
             """
             cursor.execute(query, (username, email, cellphone, password))
@@ -120,14 +162,10 @@ if __name__ == "__main__":
     db_path = "Database/AchadosEPerdidos.db"
     item_search = ItemSearch(db_path)
 
-    username = "Ana Silva"
-    password = "senha123"
+    codu = 1
+    code = 1
 
-    if item_search.verify_login(username, password):
-        print("Login successful!") #working properly
-    else:
-        print("Invalid username or password.") #oh nous :(
-
-    password = "newpassword123"
+    print(item_search.get_user_info(codu))
+    print(item_search.get_item_image_paths(code))
     
 
