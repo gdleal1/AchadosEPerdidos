@@ -1,6 +1,7 @@
 import customtkinter as ck
 import os
 from GUI.GUIComponents.SharedComponents.BackButton import BackButton
+from GUI.GUIComponents.SharedComponents.LogoImage import LogoImage
 from PIL import Image
 
 class ExpandedItemFrame(ck.CTkFrame):
@@ -9,16 +10,20 @@ class ExpandedItemFrame(ck.CTkFrame):
         self.master = master
         
         # Configure grid
-        self.grid_columnconfigure(0, weight=1)
+        self.grid_columnconfigure((0,1,2),weight=1)
         self.grid_rowconfigure(1, weight=1)
         
         # Back button
         self.back_button = BackButton(self, frame_ref=self, switch_to_previous_frame=switch_to_search_frame)
         self.back_button.grid(row=0, column=0, padx=20, pady=10, sticky="w")
+
+        # Logo
+        self.logo_label = LogoImage(self)
+        self.logo_label.grid(row=0, column=1, padx=20, pady=10, sticky="ew")
         
         # Main content frame
         self.content_frame = ck.CTkFrame(self, fg_color="#f0f0f0")
-        self.content_frame.grid(row=1, column=0, padx=20, pady=20, sticky="nsew")
+        self.content_frame.grid(row=1, column=0, columnspan=3, padx=20, pady=20, sticky="nsew")
         self.content_frame.grid_columnconfigure(0, weight=1)
 
     def display_item(self, item_data):
@@ -38,7 +43,7 @@ class ExpandedItemFrame(ck.CTkFrame):
             title_frame,
             text=item_data['description'].title(),
             font=("Arial", 24, "bold"),
-            text_color="#333333"
+            text_color="#FFFFFF"
         ).pack(anchor="center")
         
         row_counter = 1  # Start after title
