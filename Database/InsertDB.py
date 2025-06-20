@@ -43,17 +43,18 @@ INSERT INTO categories (codc, name) VALUES
     (5, 'Materiais escolares'),
     (6, 'Chaves');
 
-INSERT INTO foundItems (codu, date, codc, description, local) VALUES
-    (1, 20240301, 1, 'Jaqueta preta encontrada', 'Praça Central'),
-    (2, 20240302, 2, 'Celular Samsung no mercado', 'Rua das Flores'),
-    (3, 20240303, 3, 'Carteira com documentos', 'Terminal Rodoviário'),
-    (4, 20240304, 4, 'Relógio dourado', 'Shopping Center'),
-    (5, 20240305, 5, 'Estojo com canetas', 'Biblioteca Municipal'),
-    (1, 20240306, 1, 'Blusa vermelha', 'Academia Central'),
-    (2, 20240307, 2, 'Notebook Dell', 'Café do Ponto'),
-    (3, 20240308, 3, 'RG em nome de Ana', 'Praia Grande'),
-    (4, 20240309, 4, 'Bolsa feminina', 'Estação Norte'),
-    (6, 20240310, 6, 'Chave de carro', 'Estacionamento A');
+INSERT INTO foundItems (codu, date, codc, description, local, status, owner, endDate) VALUES
+    (1, 20240301, 1, 'Jaqueta preta encontrada', 'Praça Central', 'ativo', 2, NULL),
+    (2, 20240302, 2, 'Celular Samsung no mercado', 'Rua das Flores', 'ativo', 1, NULL),
+    (3, 20240303, 3, 'Carteira com documentos', 'Terminal Rodoviário', 'ativo', 4, NULL),
+    (4, 20240304, 4, 'Relógio dourado', 'Shopping Center', 'finalizado', 5, 20240320),
+    (5, 20240305, 5, 'Estojo com canetas', 'Biblioteca Municipal', 'ativo', 6, NULL),
+    (1, 20240306, 1, 'Blusa vermelha', 'Academia Central', 'ativo', 7, NULL),
+    (2, 20240307, 2, 'Notebook Dell', 'Café do Ponto', 'ativo', 8, NULL),
+    (3, 20240308, 3, 'RG em nome de Ana', 'Praia Grande', 'ativo', 9, NULL),
+    (4, 20240309, 4, 'Bolsa feminina', 'Estação Norte', 'ativo', 10, NULL),
+    (6, 20240310, 6, 'Chave de carro', 'Estacionamento A', 'finalizado', 1, 20240401);
+
 
 INSERT INTO foundItemsKeywords (searchTerm, code) VALUES
     ('jaqueta', 1), ('preta', 1),
@@ -77,17 +78,17 @@ INSERT INTO foundItemsImages (path, code) VALUES
     ('imagens/bolsa.jpg', 9),
     ('imagens/chave.jpg', 10);
 
-INSERT INTO wantedItems (codu, date, codc, description, local, financialReward, symbolicReward) VALUES
-    (2, 20240201, 1, 'Perdi jaqueta preta', 'Praça Central', 50, NULL),
-    (1, 20240202, 2, 'Procuro celular Samsung', 'Rua das Flores', 100, 'Agradecimento'),
-    (3, 20240203, 3, 'Carteira com documentos', 'Rodoviária', 0, 'Gratidão'),
-    (4, 20240204, 4, 'Relógio de ouro', 'Shopping Center', 200, NULL),
-    (5, 20240205, 5, 'Estojo escolar', 'Biblioteca', 20, NULL),
-    (6, 20240206, 1, 'Blusa vermelha perdida', 'Academia Central', 30, 'Mimo'),
-    (7, 20240207, 2, 'Notebook Dell Inspiron', 'Café do Ponto', 500, NULL),
-    (8, 20240208, 3, 'Documentos RG Ana', 'Praia Grande', 0, 'Agradecimento público'),
-    (9, 20240209, 4, 'Bolsa feminina azul', 'Estação Norte', 150, NULL),
-    (10, 20240210, 6, 'Chave de carro HB20', 'Estacionamento A', 70, NULL);
+INSERT INTO wantedItems (codu, date, codc, description, local, financialReward, status, symbolicReward, finder, endDate) VALUES
+    (2, 20240201, 1, 'Perdi jaqueta preta', 'Praça Central', 50, 'ativo', NULL, 1, NULL),
+    (1, 20240202, 2, 'Procuro celular Samsung', 'Rua das Flores', 100, 'ativo', 'Agradecimento', 2, NULL),
+    (3, 20240203, 3, 'Carteira com documentos', 'Rodoviária', 0, 'ativo', 'Gratidão', 4, NULL),
+    (4, 20240204, 4, 'Relógio de ouro', 'Shopping Center', 200, 'finalizado', NULL, 5, 20240330),
+    (5, 20240205, 5, 'Estojo escolar', 'Biblioteca', 20, 'ativo', NULL, 6, NULL),
+    (6, 20240206, 1, 'Blusa vermelha perdida', 'Academia Central', 30, 'ativo', 'Mimo', 7, NULL),
+    (7, 20240207, 2, 'Notebook Dell Inspiron', 'Café do Ponto', 500, 'ativo', NULL, 8, NULL),
+    (8, 20240208, 3, 'Documentos RG Ana', 'Praia Grande', 0, 'ativo', 'Agradecimento público', 9, NULL),
+    (9, 20240209, 4, 'Bolsa feminina azul', 'Estação Norte', 150, 'ativo', NULL, 10, NULL),
+    (10, 20240210, 6, 'Chave de carro HB20', 'Estacionamento A', 70, 'finalizado', NULL, 1, 20240405);
 
 INSERT INTO wantedItemsKeywords (searchTerm, codp) VALUES
     ('jaqueta', 1),
@@ -112,30 +113,6 @@ INSERT INTO wantedItemsImages (path, codp) VALUES
     ('imagens/procura_rg.jpg', 8),
     ('imagens/procura_bolsa.jpg', 9),
     ('imagens/procura_chave.jpg', 10);
-
-INSERT INTO announcements (startDate, status, code, finder, owner, endDate) VALUES
-    (20240311, 'ativo', 1, 1, 2, NULL),
-    (20240312, 'ativo', 2, 2, 1, NULL),
-    (20240313, 'ativo', 3, 3, 4, NULL),
-    (20240314, 'finalizado', 4, 4, 5, 20240320),
-    (20240315, 'ativo', 5, 5, 6, NULL),
-    (20240316, 'ativo', 6, 6, 7, NULL),
-    (20240317, 'ativo', 7, 7, 8, NULL),
-    (20240318, 'ativo', 8, 8, 9, NULL),
-    (20240319, 'ativo', 9, 9, 10, NULL),
-    (20240320, 'finalizado', 10, 10, 1, 20240401);
-
-INSERT INTO requests (startDate, status, codp, owner, finder, endDate) VALUES
-    (20240321, 'ativo', 1, 2, 1, NULL),
-    (20240322, 'ativo', 2, 1, 2, NULL),
-    (20240323, 'ativo', 3, 3, 4, NULL),
-    (20240324, 'finalizado', 4, 4, 5, 20240330),
-    (20240325, 'ativo', 5, 5, 6, NULL),
-    (20240326, 'ativo', 6, 6, 7, NULL),
-    (20240327, 'ativo', 7, 7, 8, NULL),
-    (20240328, 'ativo', 8, 8, 9, NULL),
-    (20240329, 'ativo', 9, 9, 10, NULL),
-    (20240330, 'finalizado', 10, 10, 1, 20240405);
 """)
 
 conn.commit()

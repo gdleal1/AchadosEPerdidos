@@ -45,8 +45,12 @@ CREATE TABLE foundItems (
     codc INTEGER NOT NULL,
     description TEXT NOT NULL,
     local TEXT NOT NULL,
+    status TEXT NOT NULL,
+    owner INTEGER,
+    endDate INTEGER, 
     FOREIGN KEY (codu) REFERENCES users(codu),
-    FOREIGN KEY (codc) REFERENCES categories(codc)
+    FOREIGN KEY (codc) REFERENCES categories(codc),
+    FOREIGN KEY (owner) REFERENCES users(codu)
 );  
                
 CREATE TABLE foundItemsKeywords(
@@ -71,9 +75,13 @@ CREATE TABLE wantedItems (
     description TEXT NOT NULL,
     local TEXT NOT NULL,
     financialReward INTEGER NOT NULL,
+    status TEXT NOT NULL,
     symbolicReward TEXT,
+    finder INTEGER,
+    endDate INTEGER,
+    FOREIGN KEY (codc) REFERENCES categories(codc),
     FOREIGN KEY (codu) REFERENCES users(codu),
-    FOREIGN KEY (codc) REFERENCES categories(codc)
+    FOREIGN KEY (finder) REFERENCES users(codu)
 );  
                
 CREATE TABLE wantedItemsKeywords(
@@ -88,33 +96,7 @@ CREATE TABLE wantedItemsImages(
     path TEXT NOT NULL,
     codp INTEGER NOT NULL,
     FOREIGN KEY (codp) REFERENCES wantedItems(codp)
-);  
-
-CREATE TABLE announcements (
-    coda INTEGER PRIMARY KEY AUTOINCREMENT,
-    startDate INTEGER NOT NULL,
-    status TEXT NOT NULL,
-    code INTEGER NOT NULL,
-    finder INTEGER NOT NULL,
-    owner INTEGER,
-    endDate INTEGER,
-    FOREIGN KEY (code) REFERENCES foundItems(code),
-    FOREIGN KEY (finder) REFERENCES users(codu),   
-    FOREIGN KEY (owner) REFERENCES users(codu)         
-);
-
-CREATE TABLE requests (
-    cods INTEGER PRIMARY KEY AUTOINCREMENT,
-    startDate INTEGER NOT NULL,
-    status TEXT NOT NULL,
-    codp INTEGER NOT NULL,
-    owner INTEGER NOT NULL,
-    finder INTEGER,
-    endDate INTEGER,
-    FOREIGN KEY (codp) REFERENCES wantedItems(codp),
-    FOREIGN KEY (finder) REFERENCES users(codu),   
-    FOREIGN KEY (owner) REFERENCES users(codu)       
-);                                
+);                            
 """)
 
 conn.commit()
