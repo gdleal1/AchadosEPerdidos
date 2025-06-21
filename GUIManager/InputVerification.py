@@ -1,6 +1,6 @@
 import re
 from typing import Optional, List, Any
-from  AplicationFunctionality.SQLQueryBuilder import ItemSearch  
+from  AplicationFunctionality.ItemService import ItemService
 
 import re
 from typing import Optional, List, Any
@@ -35,7 +35,7 @@ class InputVerification:
 
         # Safe execution
         try:
-            searcher = ItemSearch("Database/AchadosEPerdidos.db")
+            searcher = ItemService("Database/AchadosEPerdidos.db")
             search_results = searcher.search_item(description, category, location, date)
             return search_results
         except Exception as e:
