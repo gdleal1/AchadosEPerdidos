@@ -22,7 +22,7 @@ class ItemService:
         
         # Base query
         query = """
-        SELECT ie.code, ie.description, c.name as category, ie.local, ie.date
+        SELECT ie.code, ie.description, c.name as category, ie.local, ie.date, ie.status
         FROM foundItems ie
         JOIN categories c ON ie.codc = c.codc
         WHERE 1=1
@@ -68,6 +68,30 @@ class ItemService:
         conn.close()
         return results
 
+    def items_found_by_user(self, codu:int):
+        """
+        Retrieve items found by a specific user.
+        
+        Returns:
+            list: List of items found by the user
+        """
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        
+        query = """
+        SELECT ie.code, ie.description, c.name as category, ie.local, ie.date, ie.status
+        FROM foundItems ie
+        JOIN categories c ON ie.codc = c.codc
+        WHERE ie.codu = ?
+        """
+        
+        cursor.execute(query, (codu,))
+        columns = [column[0] for column in cursor.description]
+        results = [dict(zip(columns, row)) for row in cursor.fetchall()]
+        
+        conn.close()
+        return results
+    
 #Example usage:
 if __name__ == "__main__":
     #Unitary rudimentary tests
@@ -79,5 +103,8 @@ if __name__ == "__main__":
     for item in results:
         print(f"Code: {item['code']}, Description: {item['description']}, Category: {item['category']}, Local: {item['local']}, Date: {item['date']}")
     
-    
+    #items found by user method
+    user_items = item_search.items_found_by_user(codu=1)
+    for item in user_items:
+        print(f"Code: {item['code']}, Description: {item['description']}, Category: {item['category']}, Local: {item['local']}, Date: {item['date']}")
 
