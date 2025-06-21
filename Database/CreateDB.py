@@ -25,13 +25,6 @@ CREATE TABLE denounces (
     FOREIGN KEY (denouncer) REFERENCES users(codu),
     FOREIGN KEY (denounced) REFERENCES users(codu)
 );
-
-CREATE TABLE denouncesImages (
-    coddi INTEGER PRIMARY KEY AUTOINCREMENT,
-    path TEXT NOT NULL,
-    codd INTEGER NOT NULL,
-    FOREIGN KEY (codd) REFERENCES denounces(codd)
-);
                
 CREATE TABLE categories (
     codc INTEGER PRIMARY KEY,
@@ -58,45 +51,7 @@ CREATE TABLE foundItemsKeywords(
     searchTerm TEXT NOT NULL,
     code INTEGER NOT NULL,
     FOREIGN KEY (code) REFERENCES foundItems(code)
-);
-               
-CREATE TABLE foundItemsImages(
-    codie INTEGER PRIMARY KEY AUTOINCREMENT,
-    path TEXT NOT NULL,
-    code INTEGER NOT NULL,
-    FOREIGN KEY (code) REFERENCES foundItems(code)
-);
-
-CREATE TABLE wantedItems (
-    codp INTEGER PRIMARY KEY AUTOINCREMENT,
-    codu INTEGER NOT NULL,
-    date INTEGER NOT NULL,
-    codc INTEGER NOT NULL,
-    description TEXT NOT NULL,
-    local TEXT NOT NULL,
-    financialReward INTEGER NOT NULL,
-    status TEXT NOT NULL,
-    symbolicReward TEXT,
-    finder INTEGER,
-    endDate INTEGER,
-    FOREIGN KEY (codc) REFERENCES categories(codc),
-    FOREIGN KEY (codu) REFERENCES users(codu),
-    FOREIGN KEY (finder) REFERENCES users(codu)
-);  
-               
-CREATE TABLE wantedItemsKeywords(
-    codpce INTEGER PRIMARY KEY AUTOINCREMENT,
-    searchTerm TEXT NOT NULL,
-    codp INTEGER NOT NULL,
-    FOREIGN KEY (codp) REFERENCES wantedItems(codp)
-);
-               
-CREATE TABLE wantedItemsImages(
-    codie INTEGER PRIMARY KEY AUTOINCREMENT,
-    path TEXT NOT NULL,
-    codp INTEGER NOT NULL,
-    FOREIGN KEY (codp) REFERENCES wantedItems(codp)
-);                            
+);                           
 """)
 
 conn.commit()
