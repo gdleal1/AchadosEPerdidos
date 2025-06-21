@@ -37,8 +37,8 @@ class App(customtkinter.CTk):
         self.report_frame = ReportUserFrame(self, self.report_to_search_frame)
         self.admin_frame = AdminFrame(self)
         
-        self.admin_frame.pack(fill="both", expand=True)
-        #self.login_frame.pack(fill="both", expand=True)
+        
+        self.login_frame.pack(fill="both", expand=True)
         
 
     # Function to switch from login frame to search frame
