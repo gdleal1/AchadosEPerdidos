@@ -12,8 +12,11 @@ class FoundItemsListBox(ck.CTkScrollableFrame):
         item_frame.grid_columnconfigure(0, weight=1)
         item_frame.grid_columnconfigure(1, weight=0)
 
+        # Salva código do item
+        item_code = item_name[1]
+
         # Item label
-        item_label = ck.CTkLabel(item_frame, text=item_name)
+        item_label = ck.CTkLabel(item_frame, text=item_name[0])
         item_label.grid(row=0, column=0, padx=(10, 5), pady=5, sticky="w")
 
         # Right-side container for entry + button
@@ -26,7 +29,7 @@ class FoundItemsListBox(ck.CTkScrollableFrame):
 
         # Button
         item_button = ck.CTkButton(actions_frame, text="Item foi devolvido",
-                                   command=lambda: self._change_item_status(item_name, item_entry.get()))
+                                   command=lambda: self._change_item_status(item_code, item_entry.get()))
         item_button.pack(side="left")
 
         self.item_frames.append(item_frame)
@@ -36,5 +39,6 @@ class FoundItemsListBox(ck.CTkScrollableFrame):
             widget.destroy()
         self.item_frames.clear()
 
-    def _change_item_status(self, item_name, message):
-        print(f"Item '{item_name}' marcado como devolvido. Mensagem: {message}")
+    # Substituir por função que utiliza o código do item e nome de usuário
+    def _change_item_status(self, item_code, message):
+        print(f"Item '{item_code}' marcado como devolvido. Mensagem: {message}")

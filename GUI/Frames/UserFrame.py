@@ -53,7 +53,8 @@ class UserFrame(ck.CTkFrame):
 
         # TODO: Buscar itens encontrados do usuário no banco de dados e adicionar na listbox
         # Exemplo:
-        for items in ["Carteira preta", "Chave azul", "Celular branco"]:
+        # Usar (Nome do item, código do item para cada item)
+        for items in [("Carteira preta", 0), ("Chave azul", 1), ("Celular branco", 2)]:
             self.found_items_listbox.add_item(items)
 
         # Go to announce frame button
