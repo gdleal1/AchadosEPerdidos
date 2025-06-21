@@ -9,11 +9,10 @@ class FoundItemsListBox(ck.CTkScrollableFrame):
         item_frame = ck.CTkFrame(self)
         item_frame.pack(fill="x", padx=5, pady=5)
 
-        # Configure grid with two columns: label on the left, everything else on the right
-        item_frame.grid_columnconfigure(0, weight=1)  # Left column (label) expands
-        item_frame.grid_columnconfigure(1, weight=0)  # Right column stays compact
+        item_frame.grid_columnconfigure(0, weight=1)
+        item_frame.grid_columnconfigure(1, weight=0)
 
-        # Item label (left-aligned)
+        # Item label
         item_label = ck.CTkLabel(item_frame, text=item_name)
         item_label.grid(row=0, column=0, padx=(10, 5), pady=5, sticky="w")
 
