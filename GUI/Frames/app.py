@@ -4,6 +4,7 @@ from GUI.Frames.SearchFrame import SearchFrame
 from GUI.Frames.LoginRegisterFrame import LoginRegisterFrame
 from GUI.Frames.AnnounceFrame import AnnounceFrame
 from GUI.Frames.ExpandedItemFrame import ExpandedItemFrame
+from GUI.Frames.UserFrame import UserFrame
 
 class App(customtkinter.CTk):
     def __init__(self):
@@ -26,12 +27,15 @@ class App(customtkinter.CTk):
         self._set_appearance_mode("dark") 
 
         # Creating frames
-        self.search_frame = SearchFrame(self, self.search_to_login_frame)
+        self.search_frame = SearchFrame(self, self.search_to_login_frame, self.search_to_user_frame)
         self.login_frame = LoginRegisterFrame(self, self.login_to_search_frame)
         self.announce_frame = AnnounceFrame(self, self.announce_to_search_frame)
         self.expanded_item_frame = ExpandedItemFrame(self, self.item_to_search_frame)
+        self.user_frame = UserFrame(self, self.user_to_search_frame, self.user_to_announce_frame)
+        
 
         self.login_frame.pack(fill="both", expand=True)
+        #self.user_frame.pack(fill="both", expand=True)
 
     # Function to switch from login frame to search frame
     def login_to_search_frame(self):
@@ -58,3 +62,18 @@ class App(customtkinter.CTk):
     def item_to_search_frame(self):
         self.expanded_item_frame.pack_forget()
         self.search_frame.pack(fill="both", expand=True)
+    
+    # Function to switch from user frame to search frame
+    def user_to_search_frame(self):
+        self.user_frame.pack_forget()
+        self.search_frame.pack(fill="both", expand=True)
+    
+    # Function to switch from user frame to announce frame
+    def user_to_announce_frame(self):
+        self.user_frame.pack_forget()
+        self.announce_frame.pack(fill="both", expand=True)
+    
+    # Function to switch from Search frame to user frame
+    def search_to_user_frame(self):
+        self.search_frame.pack_forget()
+        self.user_frame.pack(fill="both", expand=True)

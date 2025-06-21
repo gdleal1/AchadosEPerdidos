@@ -9,7 +9,7 @@ from GUI.GUIComponents.SharedComponents.BackButton import BackButton
 from GUI.Frames.ItemFrame import ItemFrame
 
 class SearchFrame(ck.CTkFrame):
-    def __init__(self, master, switch_to_login_frame):
+    def __init__(self, master, switch_to_login_frame, switch_to_user_frame):
         super().__init__(master)
         self.master = master
 
@@ -24,6 +24,10 @@ class SearchFrame(ck.CTkFrame):
         self.back_button = BackButton(self, frame_ref=self, switch_to_previous_frame=switch_to_login_frame)
         self.back_button.grid(row=0, column=0, padx=20, pady=10, sticky="w")
 
+        # Change to user frame button
+        self.change_to_user_frame_button = ck.CTkButton(self,  text="Ir para perfil", command=switch_to_user_frame)
+        self.change_to_user_frame_button.grid(row=0, column=5, padx=20, pady=10, sticky="e")
+            
         # Frame title
         self.title_frame_label = ck.CTkLabel(self, text="===================================================== Buscar Itens Perdidos =====================================================", font=("Arial", 20))
         self.title_frame_label.grid(row=1, column=0, columnspan=6,pady=(20, 10))
