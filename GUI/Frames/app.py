@@ -5,6 +5,7 @@ from GUI.Frames.LoginRegisterFrame import LoginRegisterFrame
 from GUI.Frames.AnnounceFrame import AnnounceFrame
 from GUI.Frames.ExpandedItemFrame import ExpandedItemFrame
 from GUI.Frames.UserFrame import UserFrame
+from GUI.Frames.ReportUserFrame import ReportUserFrame
 
 class App(customtkinter.CTk):
     def __init__(self):
@@ -32,6 +33,7 @@ class App(customtkinter.CTk):
         self.announce_frame = AnnounceFrame(self, self.announce_to_search_frame)
         self.expanded_item_frame = ExpandedItemFrame(self, self.item_to_search_frame)
         self.user_frame = UserFrame(self, self.user_to_search_frame, self.user_to_announce_frame)
+        self.report_frame = ReportUserFrame(self, self.back_to_search_frame)
         
 
         self.login_frame.pack(fill="both", expand=True)
@@ -40,6 +42,11 @@ class App(customtkinter.CTk):
     # Function to switch from login frame to search frame
     def login_to_search_frame(self):
         self.login_frame.pack_forget()
+        self.search_frame.pack(fill="both", expand=True)
+
+    # Function to go back to search frame after report
+    def back_to_search_frame(self):
+        self.report_frame.pack_forget()
         self.search_frame.pack(fill="both", expand=True)
     
     # Function to switch from search frame to login frame

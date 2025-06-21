@@ -6,7 +6,7 @@ from GUI.GUIComponents.ReportUserComponents.ReportEntry import ReportEntry
 from GUI.GUIComponents.ReportUserComponents.TitleEntry import TitleEntry
 
 
-class LoginRegisterFrame(ck.CTkFrame):
+class ReportUserFrame(ck.CTkFrame):
     def __init__(self, master, switch_to_search_frame):
         super().__init__(master)
         self.switch_to_search_frame = switch_to_search_frame
