@@ -8,6 +8,7 @@ class ReportButton(ck.CTkButton):
     
     
     def report_action(self):
+        # TODO: Implementar a lógica de denúncia do usuário
         self.switch_to_search_frame()
 
     

@@ -6,6 +6,7 @@ from GUI.Frames.AnnounceFrame import AnnounceFrame
 from GUI.Frames.ExpandedItemFrame import ExpandedItemFrame
 from GUI.Frames.UserFrame import UserFrame
 from GUI.Frames.ReportUserFrame import ReportUserFrame
+from GUI.Frames.AdminFrame import AdminFrame
 
 class App(customtkinter.CTk):
     def __init__(self):
@@ -32,21 +33,17 @@ class App(customtkinter.CTk):
         self.login_frame = LoginRegisterFrame(self, self.login_to_search_frame)
         self.announce_frame = AnnounceFrame(self, self.announce_to_search_frame)
         self.expanded_item_frame = ExpandedItemFrame(self, self.item_to_search_frame)
-        self.user_frame = UserFrame(self, self.user_to_search_frame, self.user_to_announce_frame)
-        self.report_frame = ReportUserFrame(self, self.back_to_search_frame)
+        self.user_frame = UserFrame(self, self.user_to_search_frame, self.user_to_announce_frame, self.user_to_report_frame)
+        self.report_frame = ReportUserFrame(self, self.report_to_search_frame)
+        self.admin_frame = AdminFrame(self)
         
-
-        self.login_frame.pack(fill="both", expand=True)
-        #self.user_frame.pack(fill="both", expand=True)
+        self.admin_frame.pack(fill="both", expand=True)
+        #self.login_frame.pack(fill="both", expand=True)
+        
 
     # Function to switch from login frame to search frame
     def login_to_search_frame(self):
         self.login_frame.pack_forget()
-        self.search_frame.pack(fill="both", expand=True)
-
-    # Function to go back to search frame after report
-    def back_to_search_frame(self):
-        self.report_frame.pack_forget()
         self.search_frame.pack(fill="both", expand=True)
     
     # Function to switch from search frame to login frame
@@ -84,3 +81,15 @@ class App(customtkinter.CTk):
     def search_to_user_frame(self):
         self.search_frame.pack_forget()
         self.user_frame.pack(fill="both", expand=True)
+    
+    # Function to switch from report frame to search frame
+    def report_to_search_frame(self):
+        self.report_frame.pack_forget()
+        self.search_frame.pack(fill="both", expand=True)
+    
+    # Function to switch from user frame to report frame
+    def user_to_report_frame(self):
+        self.user_frame.pack_forget()
+        self.report_frame.pack(fill="both", expand=True)
+    
+    

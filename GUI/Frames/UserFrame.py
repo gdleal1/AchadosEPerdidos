@@ -5,12 +5,13 @@ from GUI.GUIComponents.UserFrameComponents.FoundItemsListBox import FoundItemsLi
 
 
 class UserFrame(ck.CTkFrame):
-    def __init__(self, master, switch_to_search_frame, switch_to_announce_frame):
+    def __init__(self, master, switch_to_search_frame, switch_to_announce_frame, switch_to_report_frame):
+        
         super().__init__(master)
         self.master = master
 
         self.grid_columnconfigure((0, 1, 2, 3), weight=1)
-        self.grid_rowconfigure((1,5), weight=1)
+        self.grid_rowconfigure((1,5,6), weight=1)
         
         # Back button
         self.back_button = BackButton(self, frame_ref=self, switch_to_previous_frame=switch_to_search_frame)
@@ -57,7 +58,11 @@ class UserFrame(ck.CTkFrame):
 
         # Go to announce frame button
         self.goto_announce_frame__button = ck.CTkButton(self, text="Anunciar Item Encontrado", command=switch_to_announce_frame)
-        self.goto_announce_frame__button.grid(row=5, column=0, columnspan=4,  padx=100, pady=10, sticky="ew")
+        self.goto_announce_frame__button.grid(row=5, column=0, columnspan=2,  padx=(100,10), pady=10, sticky="ew")
+
+        # Go to report frame button
+        self.goto_report_frame_button = ck.CTkButton(self, text="Denunciar Usuário", command=switch_to_report_frame)
+        self.goto_report_frame_button.grid(row=5, column=2, columnspan=2, padx=(10,100), pady=10, sticky="ew")
 
 
 
