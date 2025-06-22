@@ -46,14 +46,14 @@ class FoundItemsListBox(ck.CTkScrollableFrame):
             widget.destroy()
         self.item_frames.clear()
 
-    # Substituir por função que utiliza o código do item e nome de usuário
+    
     def _change_item_status(self, item_code, user_email):
         itemService = ItemService()
         itemMarkedFound = itemService.mark_item_as_found(item_code, user_email)
         if itemMarkedFound:
             messagebox.showinfo("Sucesso", "Item marcado como encontrado com sucesso!")
         else:
-            messagebox.showerror("Erro", "Não foi possível marcar o item como encontrado. Verifique se o item existe e está ativo.")
+            messagebox.showerror("Erro", "Não foi possível marcar o item como encontrado. Verifique se o e-mail do dono está correto.")
 
         
 

@@ -38,8 +38,8 @@ class App(customtkinter.CTk):
         self.announce_frame = AnnounceFrame(self, self.announce_to_search_frame)
         self.expanded_item_frame = ExpandedItemFrame(self, self.item_to_search_frame)
         self.user_frame = UserFrame(self, self.user_to_search_frame, self.user_to_announce_frame, self.user_to_report_frame, self.session)
-        self.report_frame = ReportUserFrame(self, self.report_to_search_frame)
-        self.admin_frame = AdminFrame(self)
+        self.report_frame = ReportUserFrame(self, self.report_to_search_frame, self.session)
+        self.admin_frame = AdminFrame(self, self.admin_to_login_frame, self.session)
         
         
         self.login_frame.pack(fill="both", expand=True)
@@ -101,5 +101,15 @@ class App(customtkinter.CTk):
     def user_to_report_frame(self):
         self.user_frame.pack_forget()
         self.report_frame.pack(fill="both", expand=True)
+    
+    # Function to switch from admin frame to login frame
+    def admin_to_login_frame(self):
+        self.admin_frame.pack_forget()
+        self.login_frame.pack(fill="both", expand=True)
+    
+    # Function to switch from report frame to search frame
+    def report_to_search_frame(self):
+        self.report_frame.pack_forget()
+        self.search_frame.pack(fill="both", expand=True)
     
     
