@@ -116,18 +116,22 @@ class ItemService:
         # Check if the item exists and is active
         cursor.execute("SELECT status FROM foundItems WHERE code = ? AND status = 'active'", (code,))
         item = cursor.fetchone()
-        
-        if not item:
+
+        #Check if user exists
+        cursor.execute("SELECT codu FROM users WHERE email = ?", (user_email,))
+        user = cursor.fetchone()
+
+        if not item or not user:
             conn.close()
             return False
         
         # Update the item's status to 'finalizado' and set the owner
         cursor.execute("""
             UPDATE foundItems 
-            SET status = 'finalized', owner = (SELECT codu FROM users WHERE email = ?), endDate = ?
+            SET status = 'finalized', owner = ?, endDate = ?
             WHERE code = ?
-        """, (user_email, datetime.now().strftime("%Y%m%d"), code))
-        
+        """, (user[0], datetime.now().strftime("%Y%m%d"), code))
+
         conn.commit()
         conn.close()
         return True
