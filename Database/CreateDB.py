@@ -39,6 +39,7 @@ CREATE TABLE foundItems (
     description TEXT NOT NULL,
     local TEXT NOT NULL,
     status TEXT NOT NULL,
+    completeDescription TEXT NOT NULL,
     owner INTEGER,
     endDate INTEGER, 
     FOREIGN KEY (codu) REFERENCES users(codu),
