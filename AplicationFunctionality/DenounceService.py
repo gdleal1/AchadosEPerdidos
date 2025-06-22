@@ -6,7 +6,7 @@ class DenounceService:
 
     def get_denounces(self) -> list:
         """
-        Retrieve all denounces from the database.
+        Retrieve all denouncer users names from the database.
         
         Returns:
             list: A list of dictionaries containing denounce information
@@ -14,7 +14,14 @@ class DenounceService:
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
 
-        cursor.execute("SELECT * FROM denounces")
+        cursor.execute("""
+            SELECT denounces.*, 
+               denouncer_user.name AS denouncer_name, 
+               denounced_user.name AS denounced_name
+            FROM denounces
+            JOIN users AS denouncer_user ON denounces.denouncer = denouncer_user.codu
+            JOIN users AS denounced_user ON denounces.denounced = denounced_user.codu
+        """)
         rows = cursor.fetchall()
 
         columns = [column[0] for column in cursor.description]
