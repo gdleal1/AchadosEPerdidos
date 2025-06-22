@@ -8,6 +8,7 @@ class LoginButton(ck.CTkButton):
         self.frame = frame_ref
         self.switch_to_search_frame = switch_to_search_frame
         self.switch_to_admin_frame = switch_to_admin_frame
+        self.user_service = UserService()
     
     
     def login_action(self):
@@ -19,11 +20,10 @@ class LoginButton(ck.CTkButton):
             messagebox.showerror("Login inválido", "Preencha todos os campos!")
             return
 
-        user_service = UserService()
-        codu = user_service.verify_login(email, password)
+        codu = self.user_service.verify_login(email, password)
 
         if codu is not None:
-            user_infos = user_service.get_user_info(codu)
+            user_infos = self.user_service.get_user_info(codu)
 
             if user_infos['role'] == 'moderador':
                 self.switch_to_admin_frame()

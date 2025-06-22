@@ -6,7 +6,8 @@ class RegisterButton(ck.CTkButton):
     def __init__(self, master, frame_ref, **kwargs):
         super().__init__(master, text="Registrar-se", command=self.register_action, **kwargs)
         self.frame = frame_ref
-    
+        self.user_service = UserService()
+
     
     def register_action(self):
         
@@ -19,9 +20,7 @@ class RegisterButton(ck.CTkButton):
             messagebox.showerror("Registro inválido", "Todos os campos são obrigatórios!")
             return
 
-        user_service = UserService()
-
-        if user_service.insert_new_user(username, email, cellphone, password):
+        if self.user_service.insert_new_user(username, email, cellphone, password):
             messagebox.showinfo("Registro completo", "Usuário foi registrado com sucesso!")
 
             self.frame.register_name_entry.delete(0, 'end')

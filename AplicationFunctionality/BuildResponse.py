@@ -1,15 +1,15 @@
-from UserService import UserService
+from AplicationFunctionality.UserService import UserService
 
 class FoundItemProcessor:
     def __init__(self, raw_data):
         self.raw_data = raw_data
         self.processed_items = []
+        self.user_service = UserService()
         self._process_items()
-
-        self.userService = UserService()
 
     def _process_items(self):
         """Process raw database records into clean item objects"""
+
         for item in self.raw_data:
             processed = {
                 'id': item['code'],
@@ -18,7 +18,7 @@ class FoundItemProcessor:
                 'location': item['local'],
                 'date': self._format_date(item['date']),
                 'status': item['status'],
-                'contact_phone': self.userService.get_user_info(item['codu'])['cellphone']
+                'contact_phone': self.user_service.get_user_info(item['codu'])['cellphone']
             }
             self.processed_items.append(processed)
 
