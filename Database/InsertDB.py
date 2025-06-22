@@ -32,16 +32,16 @@ INSERT INTO categories (codc, name) VALUES
     (6, 'Chaves');
 
 INSERT INTO foundItems (codu, date, codc, description, local, status, owner, endDate) VALUES
-    (1, 20240301, 1, 'Jaqueta preta encontrada', 'Praça Central', 'ativo', NULL, NULL),
-    (2, 20240302, 2, 'Celular Samsung no mercado', 'Rua das Flores', 'ativo', NULL, NULL),
-    (3, 20240303, 3, 'Carteira com documentos', 'Terminal Rodoviário', 'ativo', NULL, NULL),
+    (1, 20240301, 1, 'Jaqueta preta encontrada', 'Praça Central', 'active', NULL, NULL),
+    (2, 20240302, 2, 'Celular Samsung no mercado', 'Rua das Flores', 'active', NULL, NULL),
+    (3, 20240303, 3, 'Carteira com documentos', 'Terminal Rodoviário', 'active', NULL, NULL),
     (4, 20240304, 4, 'Relógio dourado', 'Shopping Center', 'finalizado', 5, 20240320),
-    (5, 20240305, 5, 'Estojo com canetas', 'Biblioteca Municipal', 'ativo', NULL, NULL),
-    (1, 20240306, 1, 'Blusa vermelha', 'Academia Central', 'ativo', NULL, NULL),
-    (2, 20240307, 2, 'Notebook Dell', 'Café do Ponto', 'ativo', NULL, NULL),
-    (3, 20240308, 3, 'RG em nome de Ana', 'Praia Grande', 'ativo', NULL, NULL),
-    (4, 20240309, 4, 'Bolsa feminina', 'Estação Norte', 'ativo', NULL, NULL),
-    (6, 20240310, 6, 'Chave de carro', 'Estacionamento A', 'finalizado', 1, 20240401);
+    (5, 20240305, 5, 'Estojo com canetas', 'Biblioteca Municipal', 'active', NULL, NULL),
+    (1, 20240306, 1, 'Blusa vermelha', 'Academia Central', 'active', NULL, NULL),
+    (2, 20240307, 2, 'Notebook Dell', 'Café do Ponto', 'active', NULL, NULL),
+    (3, 20240308, 3, 'RG em nome de Ana', 'Praia Grande', 'active', NULL, NULL),
+    (4, 20240309, 4, 'Bolsa feminina', 'Estação Norte', 'active', NULL, NULL),
+    (6, 20240310, 6, 'Chave de carro', 'Estacionamento A', 'finalized', 1, 20240401);
 
 
 INSERT INTO foundItemsKeywords (searchTerm, code) VALUES

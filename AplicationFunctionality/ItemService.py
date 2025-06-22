@@ -92,6 +92,84 @@ class ItemService:
         conn.close()
         return results
     
+    def mark_item_as_found(self, code:int, user_email:str):
+        """
+        Mark an item as found by a user.
+        
+        Returns:
+            bool: True if the item was successfully marked as found, False otherwise
+        """
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        
+        # Check if the item exists and is active
+        cursor.execute("SELECT status FROM foundItems WHERE code = ? AND status = 'active'", (code,))
+        item = cursor.fetchone()
+        
+        if not item:
+            conn.close()
+            return False
+        
+        # Update the item's status to 'finalizado' and set the owner
+        cursor.execute("""
+            UPDATE foundItems 
+            SET status = 'finalized', owner = (SELECT codu FROM users WHERE email = ?), endDate = ?
+            WHERE code = ?
+        """, (user_email, datetime.now().strftime("%Y%m%d"), code))
+        
+        conn.commit()
+        conn.close()
+        return True
+    
+    def add_found_item(self, 
+                     codu:int, 
+                     codc:int, 
+                     description:str, 
+                     local:str):
+        """
+        Add a new found item to the database.
+        
+        Returns:
+            bool: True if the item was successfully added, False otherwise
+        """
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+
+        date = datetime.now().strftime("%Y%m%d")  # Get current date in YYYYMMDD format
+
+        try:
+            cursor.execute("""
+                INSERT INTO foundItems (codu, date, codc, description, local, status, owner, endDate)
+                VALUES (?, ?, ?, ?, ?, 'active', NULL, NULL)
+            """, (codu, date, codc, description, local))
+            conn.commit()
+            return True
+        except sqlite3.IntegrityError as e:
+            print(f"Error inserting item: {e}")
+            return False
+        finally:
+            conn.close()
+
+    def remove_item(self, code:int):
+        """
+        Remove an item from the database.
+        
+        Returns:
+            bool: True if the item was successfully removed, False otherwise
+        """
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        
+        cursor.execute("DELETE FROM foundItems WHERE code = ?", (code,))
+        conn.commit()
+        
+        if cursor.rowcount > 0:
+            conn.close()
+            return True
+        else:
+            conn.close()
+            return False
+        
 #Example usage:
 if __name__ == "__main__":
     #Unitary rudimentary tests

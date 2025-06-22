@@ -38,7 +38,7 @@ class UserService:
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
         
-        query = "SELECT * FROM users WHERE name = ? AND password = ?"
+        query = "SELECT * FROM users WHERE name = ? AND password = ? AND role != 'banned'"
         cursor.execute(query, (username, password))
         
         result = cursor.fetchone()
@@ -74,6 +74,28 @@ class UserService:
         finally:
             conn.close()
 
+    def ban_user(self, codu:int) -> bool:
+        """
+        Ban a user by setting their role to 'banned'.
+        
+        Returns:
+            bool: True if the user was successfully banned, False if the user does not exist
+        """
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        
+        query = "UPDATE users SET role = 'banned' WHERE codu = ?"
+        cursor.execute(query, (codu,))
+        
+        if cursor.rowcount == 0:
+            conn.close()
+            return False
+        
+        conn.commit()
+        conn.close()
+        return True
+
+# This code defines a UserService class that provides methods to interact with user data in a SQLite database
 #Example usage:
 if __name__ == "__main__":
     #Unitary tests
