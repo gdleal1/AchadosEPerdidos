@@ -5,7 +5,7 @@ class BackButton(ck.CTkButton):
     def __init__(self, master, frame_ref, switch_to_previous_frame=None, **kwargs):
         
         # Load the image for the button
-        image = Image.open("GUI\\images\\back-button-icon.png")  
+        image = Image.open("GUI/images/back-button-icon.png")
         self.back_image = ck.CTkImage(light_image=image, dark_image=image, size=(45, 45))
 
         # Create the button with the image and command
