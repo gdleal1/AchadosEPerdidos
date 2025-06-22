@@ -9,8 +9,9 @@ class FoundItemProcessor:
 
     def _process_items(self):
         """Process raw database records into clean item objects"""
-
+        
         for item in self.raw_data:
+            print(item)
             processed = {
                 'id': item['code'],
                 'description': item['description'],

@@ -22,7 +22,7 @@ class ItemService:
         
         # Base query
         query = """
-        SELECT ie.code, ie.description, c.name as category, ie.local, ie.date, ie.status
+        SELECT ie.code, ie.codu, ie.description, c.name as category, ie.local, ie.date, ie.status
         FROM foundItems ie
         JOIN categories c ON ie.codc = c.codc
         WHERE 1=1
