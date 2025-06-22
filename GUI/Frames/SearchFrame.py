@@ -96,4 +96,4 @@ class SearchFrame(ck.CTkFrame):
             self.date_entry.config(state='disabled')
         else:
             self.date_entry.config(state='normal')
-
+    

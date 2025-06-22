@@ -7,6 +7,7 @@ from GUI.Frames.ExpandedItemFrame import ExpandedItemFrame
 from GUI.Frames.UserFrame import UserFrame
 from GUI.Frames.ReportUserFrame import ReportUserFrame
 from GUI.Frames.AdminFrame import AdminFrame
+from GUI.GUIManager.Session import Session
 
 class App(customtkinter.CTk):
     def __init__(self):
@@ -28,12 +29,15 @@ class App(customtkinter.CTk):
         # Style
         self._set_appearance_mode("dark") 
 
+        # Session
+        self.session = Session()
+
         # Creating frames
         self.search_frame = SearchFrame(self, self.search_to_login_frame, self.search_to_user_frame)
-        self.login_frame = LoginRegisterFrame(self, self.login_to_search_frame, self.login_to_admin_frame)
+        self.login_frame = LoginRegisterFrame(self, self.login_to_search_frame, self.login_to_admin_frame, self.session)
         self.announce_frame = AnnounceFrame(self, self.announce_to_search_frame)
         self.expanded_item_frame = ExpandedItemFrame(self, self.item_to_search_frame)
-        self.user_frame = UserFrame(self, self.user_to_search_frame, self.user_to_announce_frame, self.user_to_report_frame)
+        self.user_frame = UserFrame(self, self.user_to_search_frame, self.user_to_announce_frame, self.user_to_report_frame, self.session)
         self.report_frame = ReportUserFrame(self, self.report_to_search_frame)
         self.admin_frame = AdminFrame(self)
         
@@ -86,6 +90,7 @@ class App(customtkinter.CTk):
     def search_to_user_frame(self):
         self.search_frame.pack_forget()
         self.user_frame.pack(fill="both", expand=True)
+        self.user_frame.update_frame(self.session)
     
     # Function to switch from report frame to search frame
     def report_to_search_frame(self):

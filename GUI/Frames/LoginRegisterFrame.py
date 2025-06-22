@@ -9,11 +9,11 @@ from GUI.GUIComponents.LoginRegisterFrameComponents.RegisterButton import Regist
 
 
 class LoginRegisterFrame(ck.CTkFrame):
-    def __init__(self, master, switch_to_search_frame, switch_to_admin_frame):
+    def __init__(self, master, switch_to_search_frame, switch_to_admin_frame, session):
         super().__init__(master)
         self.switch_to_search_frame = switch_to_search_frame
         self.switch_to_admin_frame = switch_to_admin_frame
-        
+
         self.grid_columnconfigure((0,1), weight=1)
         
         # Logo
@@ -33,7 +33,7 @@ class LoginRegisterFrame(ck.CTkFrame):
         self.login_password_entry.grid(row=3, column=0, padx=40, pady=10, sticky="ew")
 
         # Login button
-        self.login_button = LoginButton(self, frame_ref=self, switch_to_search_frame=self.switch_to_search_frame, switch_to_admin_frame=self.switch_to_admin_frame)
+        self.login_button = LoginButton(self, frame_ref=self, switch_to_search_frame=self.switch_to_search_frame, switch_to_admin_frame=self.switch_to_admin_frame, session=session)
         self.login_button.grid(row=4, column=0, padx=40, pady=10, sticky="ew")
 
         # Register label

@@ -2,7 +2,7 @@ import sqlite3
 from datetime import datetime, timedelta
 
 class ItemService:
-    def __init__(self, db_path):
+    def __init__(self, db_path="Database/AchadosEPerdidos.db"):
         self.db_path = db_path
     
     def search_item(self, 
@@ -173,8 +173,7 @@ class ItemService:
 #Example usage:
 if __name__ == "__main__":
     #Unitary rudimentary tests
-    db_path = "Database/AchadosEPerdidos.db"
-    item_search = ItemService(db_path)
+    item_search = ItemService()
 
     #search for items method
     results = item_search.search_item(item_name="jaqueta", category="Vestuário", local="Praça Central", date="01/03/2024")
