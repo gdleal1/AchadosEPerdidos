@@ -24,15 +24,8 @@ class AdminFrame(ck.CTkFrame):
         self.reports_box.grid(row=3, column=1, padx=20, pady=10, sticky="nsew")
 
         denounceService = DenounceService()
-
         denounces = denounceService.get_denounces()
-        # Simulação de denúncias ( TODO: Pegar as denuncias do banco de dados e retornar elas como uma lista de dicionários )
-        denuncias = [
-            {"titulo": "Spam nos comentários", "descricao": "Usuário enviando spam repetido.", "denunciante": "João", "denunciado": "Carlos"},
-            {"titulo": "Conteúdo ofensivo", "descricao": "Publicação ofensiva ao público.", "denunciante": "Maria", "denunciado": "Pedro"},
-            {"titulo": "Informação falsa", "descricao": "Usuário divulgando informações incorretas.", "denunciante": "Ana", "denunciado": "Lucas"}
-        ]
-
+    
         # Add reports to the ReportsListBox
         for d in denounces:
             self.reports_box.add_report(d)

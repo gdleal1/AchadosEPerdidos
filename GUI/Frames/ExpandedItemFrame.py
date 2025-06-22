@@ -73,67 +73,9 @@ class ExpandedItemFrame(ck.CTkFrame):
         # Display category
         row_counter = add_detail_row("Categoria", item_data['category'], row_counter)
         
-        # Display images if available
-        if 'images' in item_data:
-            image_paths = []
-            if isinstance(item_data['images'], str):
-                image_paths = [item_data['images']]
-            elif isinstance(item_data['images'], (list, tuple)):
-                image_paths = item_data['images']
-            
-            for img_path in image_paths:
-                if os.path.exists(img_path):
-                    try:
-                        img = Image.open(img_path)
-                        img.thumbnail((600, 600))  
-                        
-                        # Create image frame
-                        img_frame = ck.CTkFrame(scroll_frame, fg_color="transparent")
-                        img_frame.grid(row=row_counter, column=0, pady=10, sticky="w")
-                        
-                        # Convert and display image
-                        ctk_img = ck.CTkImage(
-                            light_image=img,
-                            size=img.size
-                        )
-                        ck.CTkLabel(
-                            img_frame,
-                            text="",
-                            image=ctk_img
-                        ).pack()
-                        
-                        # Add filename label
-                        ck.CTkLabel(
-                            img_frame,
-                            text=os.path.basename(img_path),
-                            font=("Arial", 12),
-                            anchor="w"
-                        ).pack()
-                        
-                        row_counter += 1
-                    except Exception as e:
-                        row_counter = add_detail_row(
-                            "Erro na imagem", 
-                            f"{os.path.basename(img_path)}: {str(e)}",
-                            row_counter
-                        )
-                else:
-                    row_counter = add_detail_row(
-                        "Imagem não encontrada", 
-                        img_path,
-                        row_counter
-                    )
-        
         # Display location and date
         row_counter = add_detail_row("Local", item_data['location'].title(), row_counter)
         row_counter = add_detail_row("Data", item_data['date'], row_counter)
-        
-        # Display keywords if available
-        if 'keywords' in item_data and item_data['keywords']:
-            keywords = item_data['keywords']
-            if isinstance(keywords, (list, tuple)):
-                keywords = ", ".join(keywords)
-            row_counter = add_detail_row("Palavras-chave", keywords, row_counter)
         
         # Display contact information
         if 'cellphone' in item_data:

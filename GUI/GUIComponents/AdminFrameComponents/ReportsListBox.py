@@ -33,9 +33,9 @@ class ReportsListBox(ck.CTkScrollableFrame):
 
         ck.CTkLabel(window, text=f"Título: {report['title']}", font=("Arial", 16, "bold")).pack(pady=10)
         ck.CTkLabel(window, text=f"Descrição: {report['description']}", wraplength=380, justify="left").pack(pady=5)
-        ck.CTkLabel(window, text=f"Denunciante: {report['denouncer']}").pack(pady=5)
-        ck.CTkLabel(window, text=f"Denunciado: {report['denounced']}").pack(pady=5)
+        ck.CTkLabel(window, text=f"Denunciante: {report['denouncer_name']}").pack(pady=5)
+        ck.CTkLabel(window, text=f"Denunciado: {report['denounced_name']}").pack(pady=5)
 
         # Ban button
-        ban_button = BanButton(window,report['denounced'])
+        ban_button = BanButton(window,report['denounced'],report['denounced_name'])
         ban_button.pack(pady=20)
