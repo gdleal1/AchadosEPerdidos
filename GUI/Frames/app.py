@@ -30,7 +30,7 @@ class App(customtkinter.CTk):
 
         # Creating frames
         self.search_frame = SearchFrame(self, self.search_to_login_frame, self.search_to_user_frame)
-        self.login_frame = LoginRegisterFrame(self, self.login_to_search_frame)
+        self.login_frame = LoginRegisterFrame(self, self.login_to_search_frame, self.login_to_admin_frame)
         self.announce_frame = AnnounceFrame(self, self.announce_to_search_frame)
         self.expanded_item_frame = ExpandedItemFrame(self, self.item_to_search_frame)
         self.user_frame = UserFrame(self, self.user_to_search_frame, self.user_to_announce_frame, self.user_to_report_frame)
@@ -45,6 +45,11 @@ class App(customtkinter.CTk):
     def login_to_search_frame(self):
         self.login_frame.pack_forget()
         self.search_frame.pack(fill="both", expand=True)
+
+    # Function to switch from login frame to admin frame
+    def login_to_admin_frame(self):
+        self.login_frame.pack_forget()
+        self.admin_frame.pack(fill="both", expand=True)
     
     # Function to switch from search frame to login frame
     def search_to_login_frame(self):

@@ -1,6 +1,7 @@
 import customtkinter as ck
 from GUI.GUIComponents.SharedComponents.LogoImage import LogoImage
 from GUI.GUIComponents.AdminFrameComponents.ReportsListBox import ReportsListBox
+from AplicationFunctionality.DenounceService import DenounceService
 
 class AdminFrame(ck.CTkFrame):
     def __init__(self, master):
@@ -22,6 +23,9 @@ class AdminFrame(ck.CTkFrame):
         self.reports_box = ReportsListBox(self)
         self.reports_box.grid(row=3, column=1, padx=20, pady=10, sticky="nsew")
 
+        denounceService = DenounceService()
+
+        denounces = denounceService.get_denounces()
         # Simulação de denúncias ( TODO: Pegar as denuncias do banco de dados e retornar elas como uma lista de dicionários )
         denuncias = [
             {"titulo": "Spam nos comentários", "descricao": "Usuário enviando spam repetido.", "denunciante": "João", "denunciado": "Carlos"},
@@ -30,5 +34,5 @@ class AdminFrame(ck.CTkFrame):
         ]
 
         # Add reports to the ReportsListBox
-        for d in denuncias:
+        for d in denounces:
             self.reports_box.add_report(d)

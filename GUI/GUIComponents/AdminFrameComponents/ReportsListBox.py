@@ -10,7 +10,7 @@ class ReportsListBox(ck.CTkScrollableFrame):
         # Add a report to the frame. Expects a dictionary with title, description, reporter, and reported.
         button = ck.CTkButton(
             self,
-            text=f"Título da denúncia: {report['titulo']}",
+            text=f"Título da denúncia: {report['title']}",
             font=("Arial", 16),
             fg_color="transparent",
 
@@ -31,11 +31,11 @@ class ReportsListBox(ck.CTkScrollableFrame):
         window.title("Detalhes da Denúncia")
         window.geometry("400x300")
 
-        ck.CTkLabel(window, text=f"Título: {report['titulo']}", font=("Arial", 16, "bold")).pack(pady=10)
-        ck.CTkLabel(window, text=f"Descrição: {report['descricao']}", wraplength=380, justify="left").pack(pady=5)
-        ck.CTkLabel(window, text=f"Denunciante: {report['denunciante']}").pack(pady=5)
-        ck.CTkLabel(window, text=f"Denunciado: {report['denunciado']}").pack(pady=5)
+        ck.CTkLabel(window, text=f"Título: {report['title']}", font=("Arial", 16, "bold")).pack(pady=10)
+        ck.CTkLabel(window, text=f"Descrição: {report['description']}", wraplength=380, justify="left").pack(pady=5)
+        ck.CTkLabel(window, text=f"Denunciante: {report['denouncer']}").pack(pady=5)
+        ck.CTkLabel(window, text=f"Denunciado: {report['denounced']}").pack(pady=5)
 
         # Ban button
-        ban_button = BanButton(window,report['denunciado'])
+        ban_button = BanButton(window,report['denounced'])
         ban_button.pack(pady=20)
