@@ -59,7 +59,18 @@ class ItemService:
             except ValueError:
                 print("Invalid date format. Please use YYYYMMDD format.")
                 return []
+
+        query += " AND ie.status = 'active'"  # Only active items
         
+        query = f"""
+        WITH filtered_items AS (
+            {query}
+        )
+        SELECT fi.code, us.cellphone, fi.description, fi.category, fi.local, fi.date, fi.status
+        FROM filtered_items fi
+        JOIN users us ON fi.codu = us.codu
+        """
+
         # Execute query
         cursor.execute(query, params)
         columns = [column[0] for column in cursor.description]

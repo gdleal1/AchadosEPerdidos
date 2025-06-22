@@ -11,7 +11,6 @@ class FoundItemProcessor:
         """Process raw database records into clean item objects"""
         
         for item in self.raw_data:
-            print(item)
             processed = {
                 'id': item['code'],
                 'description': item['description'],
@@ -19,7 +18,7 @@ class FoundItemProcessor:
                 'location': item['local'],
                 'date': self._format_date(item['date']),
                 'status': item['status'],
-                'contact_phone': self.user_service.get_user_info(item['codu'])['cellphone']
+                'contact_phone': item["cellphone"]
             }
             self.processed_items.append(processed)
 
