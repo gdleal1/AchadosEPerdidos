@@ -48,8 +48,8 @@ class UserFrame(ck.CTkFrame):
         self.found_items_listbox = FoundItemsListBox(self)
         self.found_items_listbox.grid(row=4, column=1, columnspan=3, padx=(0,20), pady=10, sticky="nsew")
 
-        for items in self.session.found_items:
-            self.found_items_listbox.add_item(items)
+        for item in self.session.found_items:
+            self.found_items_listbox.add_item(item)
 
         # Go to announce frame button
         self.goto_announce_frame__button = ck.CTkButton(self, text="Anunciar Item Encontrado", command=switch_to_announce_frame)
