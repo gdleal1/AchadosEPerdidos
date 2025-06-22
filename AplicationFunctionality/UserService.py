@@ -1,7 +1,7 @@
 import sqlite3
 
 class UserService:
-    def __init__(self, db_path):
+    def __init__(self, db_path="Database/AchadosEPerdidos.db"):
         self.db_path = db_path
 
     def get_user_info(self, codu:int) -> dict:
@@ -28,23 +28,27 @@ class UserService:
         conn.close()
         return user_info
 
-    def verify_login(self, username:str, password:str) -> bool:
+    def verify_login(self, email:str, password:str) -> int | None:
         """
         Verify user login credentials.
             
         Returns:
-            bool: True if credentials are valid, False otherwise
+            int: return codu if credentials are valid
+            None: otherwise
         """
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
         
-        query = "SELECT * FROM users WHERE name = ? AND password = ? AND role != 'banned'"
-        cursor.execute(query, (username, password))
+        query = "SELECT * FROM users WHERE email = ? AND password = ? AND role != 'banned'"
+        cursor.execute(query, (email, password))
         
         result = cursor.fetchone()
-        
         conn.close()
-        return result is not None
+
+        if result is not None:
+            return result[0]
+
+        else: return None
     
     def insert_new_user(self, 
                         username:str, 
@@ -56,7 +60,7 @@ class UserService:
         Insert a new user into the database.
         
         Returns:
-        bool: True if user was successfully inserted, False if username already exists
+        bool: True if user was successfully inserted, False if already exists
         """
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
@@ -69,7 +73,6 @@ class UserService:
             conn.commit()
             return True
         except sqlite3.IntegrityError:
-            print("Username already exists.")
             return False
         finally:
             conn.close()

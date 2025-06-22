@@ -1,6 +1,6 @@
 import re
 from typing import Optional, List, Any
-from  AplicationFunctionality.ItemService import ItemService
+from AplicationFunctionality.ItemService import ItemService
 
 import re
 from typing import Optional, List, Any
