@@ -38,12 +38,8 @@ class UserFrame(ck.CTkFrame):
         self.user_cellphone_label = ck.CTkLabel(self, text=f"Celular: {self.session.user_cellphone}", font=("Arial", 20))
         self.user_cellphone_label.grid(row=3, column=0, padx=(20,0), pady= 10, sticky="ew")
         
-        # User role
-        self.user_role_label = ck.CTkLabel(self, text=f"Tipo: {self.session.user_role}", font=("Arial", 20))
-        self.user_role_label.grid(row=3, column=2, padx=(20,0), pady= 10, sticky="ew")
-
         # Found itens
-        self.found_items_label = ck.CTkLabel(self, text="Itens Encontrados:", font=("Arial", 20))
+        self.found_items_label = ck.CTkLabel(self, text="Itens Ativos Encontrados:", font=("Arial", 20))
         self.found_items_label.grid(row=4, column=0, padx=(20,0), pady= 10, sticky="ew")
         self.found_items_listbox = FoundItemsListBox(self)
         self.found_items_listbox.grid(row=4, column=1, columnspan=3, padx=(0,20), pady=10, sticky="nsew")
@@ -66,8 +62,7 @@ class UserFrame(ck.CTkFrame):
         self.user_name_label.configure(text=f"Nome: {self.session.user_name}")
         self.user_email_label.configure(text=f"Email: {self.session.user_email}")
         self.user_cellphone_label.configure(text=f"Celular: {self.session.user_cellphone}")
-        self.user_role_label.configure(text=f"Tipo: {self.session.user_role}")
-
+        
         self.found_items_listbox.clear_items()
 
         for item in self.session.found_items:

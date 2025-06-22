@@ -9,6 +9,10 @@ class FoundItemsListBox(ck.CTkScrollableFrame):
         self.clear_items()  
 
     def add_item(self, item):
+        
+        if (item['status'] != 'active'):
+            return
+        
         item_frame = ck.CTkFrame(self)
         item_frame.pack(fill="x", padx=5, pady=5)
 
