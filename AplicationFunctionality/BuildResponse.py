@@ -1,8 +1,12 @@
+from UserService import UserService
+
 class FoundItemProcessor:
     def __init__(self, raw_data):
         self.raw_data = raw_data
         self.processed_items = []
         self._process_items()
+
+        self.userService = UserService()
 
     def _process_items(self):
         """Process raw database records into clean item objects"""
@@ -13,7 +17,8 @@ class FoundItemProcessor:
                 'category': item['category'],
                 'location': item['local'],
                 'date': self._format_date(item['date']),
-                'status': 'found'  # Could be dynamic if your system tracks status
+                'status': item['status'],
+                'contact_phone': self.userService.get_user_info(item['codu'])['cellphone']
             }
             self.processed_items.append(processed)
 
