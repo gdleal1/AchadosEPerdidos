@@ -34,7 +34,7 @@ class DenounceService:
                      title: str, 
                      description: str, 
                      denouncer: int, 
-                     denounced: int) -> bool:
+                     denounced: str) -> bool:
         """
         Add a new denounce to the database.
         
@@ -44,11 +44,19 @@ class DenounceService:
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
 
+        # Check if denounced exists
+        cursor.execute("SELECT codu FROM users WHERE email = ?", (denounced,))
+        denounced_user = cursor.fetchone()
+
+        if not denounced_user:
+            print("Denounced user not found.")
+            return False
+
         try:
             cursor.execute("""
                 INSERT INTO denounces (title, description, denouncer, denounced)
                 VALUES (?, ?, ?, ?)
-            """, (title, description, denouncer, denounced))
+            """, (title, description, denouncer, denounced_user[0]))
             conn.commit()
             return True
         except sqlite3.IntegrityError as e:
