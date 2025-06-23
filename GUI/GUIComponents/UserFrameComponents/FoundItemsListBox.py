@@ -56,6 +56,7 @@ class FoundItemsListBox(ck.CTkScrollableFrame):
             # Update the session and frame
             self.frame.session.initialize_session(self.frame.session.user_codu)
             self.frame.update_frame(self.frame.session)
+            self.frame.master.recreate_admin_frame()
         
         else:
             messagebox.showerror("Erro", "Não foi possível marcar o item como encontrado. Verifique se o e-mail do dono está correto.")
