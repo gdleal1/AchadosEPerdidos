@@ -136,7 +136,7 @@ class ItemService:
     
     def add_found_item(self, 
                      codu:int, 
-                     codc:int, 
+                     category:str, 
                      description:str, 
                      comepleteDescription:str,
                      local:str):
@@ -150,6 +150,10 @@ class ItemService:
         cursor = conn.cursor()
 
         date = datetime.now().strftime("%Y%m%d")  # Get current date in YYYYMMDD format
+
+        # Get category code
+        cursor.execute("SELECT codc FROM categories WHERE name = ?", (category,))
+        codc = cursor.fetchone()
 
         try:
             cursor.execute("""
