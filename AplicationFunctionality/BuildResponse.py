@@ -14,11 +14,13 @@ class FoundItemProcessor:
             processed = {
                 'id': item['code'],
                 'description': item['description'],
+                'completeDescription': item['completeDescription'],
                 'category': item['category'],
                 'location': item['local'],
                 'date': self._format_date(item['date']),
                 'status': item['status'],
-                'contact_phone': item["cellphone"]
+                'contact_phone': item["cellphone"],
+                'email': item["email"]
             }
             self.processed_items.append(processed)
 

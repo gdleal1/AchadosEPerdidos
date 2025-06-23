@@ -22,7 +22,7 @@ class ItemService:
         
         # Base query
         query = """
-        SELECT ie.code, ie.codu, ie.description, c.name as category, ie.local, ie.date, ie.status
+        SELECT ie.codu, ie.code, ie.description, ie.completeDescription, c.name as category, ie.local, ie.date, ie.status
         FROM foundItems ie
         JOIN categories c ON ie.codc = c.codc
         WHERE 1=1
@@ -64,7 +64,7 @@ class ItemService:
         WITH filtered_items AS (
             {query}
         )
-        SELECT fi.code, us.cellphone, fi.description, fi.category, fi.local, fi.date, fi.status
+        SELECT fi.code, us.cellphone, us.email, fi.description, fi.completeDescription, fi.category, fi.local, fi.date, fi.status
         FROM filtered_items fi
         JOIN users us ON fi.codu = us.codu
         """
