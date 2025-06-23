@@ -27,8 +27,8 @@ class ReportUserFrame(ck.CTkFrame):
         self.title_frame_label.grid(row=1, column=1, padx =40, pady=10, sticky="ew")
 
         # Reported user email entry
-        self.reported_user_entry = ReportedUserEmailEntry(self)
-        self.reported_user_entry.grid(row=2, column=1, padx=40, pady=10, sticky="ew")
+        self.reported_user_email_entry = ReportedUserEmailEntry(self)
+        self.reported_user_email_entry.grid(row=2, column=1, padx=40, pady=10, sticky="ew")
 
         # Title entry
         self.title_entry = TitleEntry(self)
