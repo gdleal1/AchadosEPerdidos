@@ -153,6 +153,7 @@ class ItemService:
         # Get category code
         cursor.execute("SELECT codc FROM categories WHERE name = ?", (category,))
         codc = cursor.fetchone()
+        codc = codc[0] 
 
         #Convert date from DD/MM/YYYY to YYYYMMDD
         date = datetime.strptime(date, "%d/%m/%Y").strftime("%Y%m%d")
@@ -161,7 +162,7 @@ class ItemService:
             cursor.execute("""
                 INSERT INTO foundItems (codu, date, codc, description, local, status, completeDescription, owner, endDate)
                 VALUES (?, ?, ?, ?, ?, 'active',?, NULL, NULL)
-            """, (codu, date, codc, description, completeDescription, local))
+            """, (codu, date, codc, description, local, completeDescription))
             conn.commit()
             return True
         except sqlite3.IntegrityError as e:

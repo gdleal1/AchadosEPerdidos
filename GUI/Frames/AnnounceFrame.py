@@ -8,7 +8,7 @@ from GUI.GUIComponents.AnnounceFrameComponents.AnnounceButton import AnnounceBut
 from GUI.GUIComponents.SharedComponents.BackButton import BackButton
 
 class AnnounceFrame(ck.CTkFrame):
-    def __init__(self, master, switch_to_search_frame):
+    def __init__(self, master, switch_to_search_frame, session):
         super().__init__(master)
 
         self.grid_columnconfigure((0,1,2,3,4), weight=1)
@@ -59,7 +59,7 @@ class AnnounceFrame(ck.CTkFrame):
         self.date_entry.grid(row=7, column=4, padx=(0, 20), pady=10, sticky="ew")
 
         # Announce button
-        self.announce_button = AnnounceButton(self, frame_ref=self)
+        self.announce_button = AnnounceButton(self, frame_ref=self, session=session)
         self.announce_button.grid(row=8, column = 1, columnspan=3, padx=20, pady= 40, sticky="ew")
 
 

@@ -35,7 +35,7 @@ class App(customtkinter.CTk):
         # Creating frames
         self.search_frame = SearchFrame(self, self.search_to_login_frame, self.search_to_user_frame)
         self.login_frame = LoginRegisterFrame(self, self.login_to_search_frame, self.login_to_admin_frame, self.session)
-        self.announce_frame = AnnounceFrame(self, self.announce_to_search_frame)
+        self.announce_frame = AnnounceFrame(self, self.announce_to_search_frame, self.session)
         self.expanded_item_frame = ExpandedItemFrame(self, self.item_to_search_frame)
         self.user_frame = UserFrame(self, self.user_to_search_frame, self.user_to_announce_frame, self.user_to_report_frame, self.session)
         self.report_frame = ReportUserFrame(self, self.report_to_search_frame, self.session)
