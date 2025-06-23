@@ -138,6 +138,7 @@ class ItemService:
                      codu:int, 
                      codc:int, 
                      description:str, 
+                     comepleteDescription:str,
                      local:str):
         """
         Add a new found item to the database.
@@ -152,9 +153,9 @@ class ItemService:
 
         try:
             cursor.execute("""
-                INSERT INTO foundItems (codu, date, codc, description, local, status, owner, endDate)
-                VALUES (?, ?, ?, ?, ?, 'active', NULL, NULL)
-            """, (codu, date, codc, description, local))
+                INSERT INTO foundItems (codu, date, codc, description, local, status, completeDescription, owner, endDate)
+                VALUES (?, ?, ?, ?, ?, 'active',?, NULL, NULL)
+            """, (codu, date, codc, description, comepleteDescription, local))
             conn.commit()
             return True
         except sqlite3.IntegrityError as e:
