@@ -5,7 +5,7 @@ from AplicationFunctionality.DenounceService import DenounceService
 from GUI.GUIComponents.SharedComponents.BackButton import BackButton
 
 class AdminFrame(ck.CTkFrame):
-    def __init__(self, master, switch_to_login_frame, session):
+    def __init__(self, master, switch_to_login_frame):
         super().__init__(master)
         
         self.grid_columnconfigure((0, 1, 2), weight=1)

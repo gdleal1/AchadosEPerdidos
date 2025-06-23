@@ -39,7 +39,7 @@ class App(customtkinter.CTk):
         self.expanded_item_frame = ExpandedItemFrame(self, self.item_to_search_frame)
         self.user_frame = UserFrame(self, self.user_to_search_frame, self.user_to_announce_frame, self.user_to_report_frame, self.session)
         self.report_frame = ReportUserFrame(self, self.report_to_search_frame, self.session)
-        self.admin_frame = AdminFrame(self, self.admin_to_login_frame, self.session)
+        self.admin_frame = AdminFrame(self, self.admin_to_login_frame)
         
         
         self.login_frame.pack(fill="both", expand=True)
