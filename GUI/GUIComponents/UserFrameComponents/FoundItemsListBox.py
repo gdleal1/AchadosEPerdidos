@@ -3,10 +3,11 @@ from AplicationFunctionality.ItemService import ItemService
 from tkinter import messagebox
 
 class FoundItemsListBox(ck.CTkScrollableFrame):
-    def __init__(self, master, **kwargs):
+    def __init__(self, master, frame_ref, **kwargs):
         super().__init__(master, **kwargs)
         self.item_frames = []
         self.clear_items()  
+        self.frame = frame_ref
 
     def add_item(self, item):
         
@@ -52,6 +53,10 @@ class FoundItemsListBox(ck.CTkScrollableFrame):
         itemMarkedFound = itemService.mark_item_as_found(item_code, user_email)
         if itemMarkedFound:
             messagebox.showinfo("Sucesso", "Item marcado como encontrado com sucesso!")
+            # Update the session and frame
+            self.frame.session.initialize_session(self.frame.session.user_codu)
+            self.frame.update_frame(self.frame.session)
+        
         else:
             messagebox.showerror("Erro", "Não foi possível marcar o item como encontrado. Verifique se o e-mail do dono está correto.")
 

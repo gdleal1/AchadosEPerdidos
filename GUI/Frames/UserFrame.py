@@ -41,7 +41,7 @@ class UserFrame(ck.CTkFrame):
         # Found itens
         self.found_items_label = ck.CTkLabel(self, text="Itens Ativos Encontrados:", font=("Arial", 20))
         self.found_items_label.grid(row=4, column=0, padx=(20,0), pady= 10, sticky="ew")
-        self.found_items_listbox = FoundItemsListBox(self)
+        self.found_items_listbox = FoundItemsListBox(self,frame_ref=self)
         self.found_items_listbox.grid(row=4, column=1, columnspan=3, padx=(0,20), pady=10, sticky="nsew")
 
         for item in self.session.found_items:

@@ -1,6 +1,5 @@
 import customtkinter as ck
 from AplicationFunctionality.DenounceService import DenounceService
-from GUI.Frames.AdminFrame import AdminFrame
 from tkinter import messagebox
 
 class ReportButton(ck.CTkButton):
@@ -24,8 +23,8 @@ class ReportButton(ck.CTkButton):
         )
         if denouncedAdded:
             messagebox.showinfo("Denúncia Enviada", "Sua denúncia foi enviada com sucesso!")
-            self.frame.master.admin_frame.destroy()
-            self.frame.master.admin_frame = AdminFrame(self.frame.master, self.frame.master.admin_to_login_frame)
+            self.frame.master.recreate_admin_frame()
+            
         else:
             messagebox.showerror("Erro", "Não foi possível enviar a denúncia. Verifique os dados e tente novamente.")
 

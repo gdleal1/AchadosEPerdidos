@@ -112,4 +112,9 @@ class App(customtkinter.CTk):
         self.report_frame.pack_forget()
         self.search_frame.pack(fill="both", expand=True)
     
+    # Function to recreate the AdminFrame
+    def recreate_admin_frame(self):
+        self.admin_frame.destroy()
+        self.admin_frame = AdminFrame(self, self.admin_to_login_frame)
+    
     
