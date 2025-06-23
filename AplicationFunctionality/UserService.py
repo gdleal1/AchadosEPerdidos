@@ -66,8 +66,8 @@ class UserService:
         cursor = conn.cursor()
         try:
             query = """
-            INSERT INTO users (name, email, cellphone, password, average_rating, rating_count, role)
-            VALUES (?, ?, ?, ?, 0, 0, 'comum')
+            INSERT INTO users (name, email, cellphone, password, role)
+            VALUES (?, ?, ?, ?, 'common')
             """
             cursor.execute(query, (username, email, cellphone, password))
             conn.commit()

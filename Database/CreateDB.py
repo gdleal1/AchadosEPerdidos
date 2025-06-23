@@ -11,8 +11,6 @@ CREATE TABLE users (
     email TEXT UNIQUE NOT NULL,
     cellphone INTEGER UNIQUE NOT NULL, 
     password TEXT NOT NULL,
-    average_rating INTEGER NOT NULL,
-    rating_count INTEGER NOT NULL,
     role TEXT NOT NULL
 );
                

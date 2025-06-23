@@ -24,8 +24,6 @@ class Session:
         self.user_email = user_infos['email']
         self.user_role = user_infos['role']
         self.user_cellphone = user_infos['cellphone']
-        self.user_average_rating = user_infos['average_rating']
-        self.user_rating_count = user_infos['rating_count']
         
         self.found_items = self.item_service.items_found_by_user(self.user_codu)
         

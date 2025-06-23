@@ -40,11 +40,6 @@ class FoundItemsListBox(ck.CTkScrollableFrame):
                                    command=lambda: self._change_item_status(item_code, item_entry.get()))
         item_button.pack(side="left")
 
-        # Button - Mark as returned
-        item_button = ck.CTkButton(actions_frame, text="Item foi devolvido",
-                                   command=lambda: self._change_item_status(item_code, item_entry.get()))
-        item_button.pack(side="left", padx=(0, 5))
-
         # Button to cancel item
         cancel_button = ck.CTkButton(actions_frame, text="✕", width=30,
                                      fg_color="red", hover_color="#990000",
