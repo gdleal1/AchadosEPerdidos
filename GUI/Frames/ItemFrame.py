@@ -1,5 +1,4 @@
 import customtkinter as ck
-from GUI.GUIComponents.SharedComponents.LogoImage import LogoImage
 
 class ItemFrame(ck.CTkFrame):
     def __init__(self, master, item_data, click_callback):

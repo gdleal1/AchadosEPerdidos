@@ -1,8 +1,6 @@
 import customtkinter as ck
-import os
 from GUI.GUIComponents.SharedComponents.BackButton import BackButton
 from GUI.GUIComponents.SharedComponents.LogoImage import LogoImage
-from PIL import Image
 
 class ExpandedItemFrame(ck.CTkFrame):
     def __init__(self, master, switch_to_search_frame):
@@ -66,20 +64,23 @@ class ExpandedItemFrame(ck.CTkFrame):
             ).pack(side="left", padx=5)
             return row + 1
         
-        # Display status if available
-        if 'status' in item_data:
-            row_counter = add_detail_row("Status", item_data['status'], row_counter)
+        # Display status 
+        if item_data['status'] == "finalized":
+            item_status = "Encontrado"
+        else:
+            item_status = "Perdido"
+
+        row_counter = add_detail_row("Status", item_status, row_counter)
         
         # Display category
         row_counter = add_detail_row("Categoria", item_data['category'], row_counter)
         
         # Display location and date
-        row_counter = add_detail_row("Local", item_data['location'].title(), row_counter)
-        row_counter = add_detail_row("Data", item_data['date'], row_counter)
+        row_counter = add_detail_row("Local da perda", item_data['location'].title(), row_counter)
+        row_counter = add_detail_row("Data da perda", item_data['date'], row_counter)
         
         # Display contact information
-        if 'cellphone' in item_data:
-            row_counter = add_detail_row("Telefone", item_data['cellphone'], row_counter)
+        row_counter = add_detail_row("Telefone para contato", item_data['contact_phone'], row_counter)
         
         if 'email' in item_data:
             row_counter = add_detail_row("Email", item_data['email'], row_counter)
