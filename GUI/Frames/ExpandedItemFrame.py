@@ -64,6 +64,9 @@ class ExpandedItemFrame(ck.CTkFrame):
             ).pack(side="left", padx=5)
             return row + 1
         
+        # Display complete description
+        row_counter = add_detail_row("Descrição completa do item", item_data['completeDescription'], row_counter)
+
         # Display status 
         if item_data['status'] == "finalized":
             item_status = "Encontrado"
@@ -81,6 +84,6 @@ class ExpandedItemFrame(ck.CTkFrame):
         
         # Display contact information
         row_counter = add_detail_row("Telefone para contato", item_data['contact_phone'], row_counter)
+        row_counter = add_detail_row("Email", item_data['email'], row_counter)
+
         
-        if 'email' in item_data:
-            row_counter = add_detail_row("Email", item_data['email'], row_counter)

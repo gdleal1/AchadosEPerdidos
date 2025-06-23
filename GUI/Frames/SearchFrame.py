@@ -74,14 +74,16 @@ class SearchFrame(ck.CTkFrame):
     
         
     # Function to add searched items to the results frame
-    def add_item_results_frame(self, description, location, date, category, status, contact_phone):
+    def add_item_results_frame(self, description, location, date, category, status, contact_phone, complete_description, email):
         item_data = {
             'description': description,
             'location': location,
             'date': date,
             'category': category,
             'status': status,
-            'contact_phone': contact_phone
+            'contact_phone': contact_phone,
+            'completeDescription': complete_description,
+            'email': email
         }
         
         # Create and add the item frame to results

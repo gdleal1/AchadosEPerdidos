@@ -34,6 +34,6 @@ class SearchButton(ck.CTkButton):
                 item['category'],
                 item['status'],
                 item['contact_phone'],
-                #item['completeDescription']
-                #item[email]
+                item['completeDescription'],
+                item['email']
             )
