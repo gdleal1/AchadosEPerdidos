@@ -138,7 +138,8 @@ class ItemService:
                      codu:int, 
                      category:str, 
                      description:str, 
-                     comepleteDescription:str,
+                     completeDescription:str,
+                     date:str,
                      local:str):
         """
         Add a new found item to the database.
@@ -149,17 +150,18 @@ class ItemService:
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
 
-        date = datetime.now().strftime("%Y%m%d")  # Get current date in YYYYMMDD format
-
         # Get category code
         cursor.execute("SELECT codc FROM categories WHERE name = ?", (category,))
         codc = cursor.fetchone()
+
+        #Convert date from DD/MM/YYYY to YYYYMMDD
+        date = datetime.strptime(date, "%d/%m/%Y").strftime("%Y%m%d")
 
         try:
             cursor.execute("""
                 INSERT INTO foundItems (codu, date, codc, description, local, status, completeDescription, owner, endDate)
                 VALUES (?, ?, ?, ?, ?, 'active',?, NULL, NULL)
-            """, (codu, date, codc, description, comepleteDescription, local))
+            """, (codu, date, codc, description, completeDescription, local))
             conn.commit()
             return True
         except sqlite3.IntegrityError as e:
@@ -188,6 +190,31 @@ class ItemService:
             conn.close()
             return False
         
+    def see_finalized_items(self):
+        """
+        Retrieve all finalized items from the database.
+        
+        Returns:
+            list: List of finalized items
+        """
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        query = """
+        SELECT ie.code, ie.description, c.name as category, ie.local, ie.date, us.cellphone, us.email, us2.email as owner_email
+        FROM foundItems ie
+        JOIN categories c ON ie.codc = c.codc
+        JOIN users us ON ie.codu = us.codu
+        JOIN users us2 ON ie.owner = us2.codu
+        WHERE ie.status = 'finalized'
+        """
+        
+        cursor.execute(query)
+        columns = [column[0] for column in cursor.description]
+        results = [dict(zip(columns, row)) for row in cursor.fetchall()]
+        
+        conn.close()
+        return results
+
 #Example usage:
 if __name__ == "__main__":
     #Unitary rudimentary tests
