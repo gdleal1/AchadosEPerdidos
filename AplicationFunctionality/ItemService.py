@@ -59,8 +59,6 @@ class ItemService:
             except ValueError:
                 print("Invalid date format. Please use YYYYMMDD format.")
                 return []
-
-        query += " AND ie.status = 'active'"  # Only active items
         
         query = f"""
         WITH filtered_items AS (
