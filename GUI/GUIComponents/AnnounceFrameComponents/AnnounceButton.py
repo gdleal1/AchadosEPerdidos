@@ -22,6 +22,7 @@ class AnnounceButton(ck.CTkButton):
 
         if addedItem:
             messagebox.showinfo("Sucesso", "Item anunciado com sucesso!")
+            self.session.initialize_session(self.session.user_codu)
         
         else:
             messagebox.showerror("Erro", "Não foi possível anunciar o item. Verifique os dados e tente novamente.")
