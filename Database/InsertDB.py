@@ -7,12 +7,12 @@ cursor.executescript("""
 INSERT INTO users (name, email, cellphone, password, average_rating, rating_count, role) VALUES
     ('Ana Silva', 'ana@email.com', 111111111, 'senha123', 5, 10, 'common'),
     ('Bruno Costa', 'bruno@email.com', 222222222, 'senha456', 4, 8, 'common'),
-    ('Carlos Lima', 'carlos@email.com', 333333333, 'senha789', 3, 6, 'moderator'),
+    ('Carlos Lima', 'carlos@email.com', 333333333, 'senha789', 3, 6, 'common'),
     ('Daniela Rocha', 'daniela@email.com', 444444444, 'senha1010', 5, 12, 'common'),
     ('Eduardo Fonseca', 'eduardo@email.com', 555555555, 'senha1111', 4, 7, 'common'),
     ('Fernanda Alves', 'fernanda@email.com', 666666666, 'senha1212', 5, 9, 'common'),
     ('Gustavo Mello', 'gustavo@email.com', 777777777, 'senha1313', 2, 3, 'common'),
-    ('Helena Dias', 'helena@email.com', 888888888, 'senha1414', 4, 6, 'moderator'),
+    ('Helena Dias', 'helena@email.com', 888888888, 'senha1414', 4, 6, 'common'),
     ('Igor Martins', 'igor@email.com', 999999999, 'senha1515', 3, 5, 'common'),
     ('Julia Teixeira', 'julia@email.com', 1010101010, 'senha1616', 5, 10, 'common'),
     ('admin', 'admin@email.com', 123456789, 'admin', 0, 0, 'moderator');
