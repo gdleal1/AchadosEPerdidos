@@ -40,6 +40,17 @@ class FoundItemsListBox(ck.CTkScrollableFrame):
                                    command=lambda: self._change_item_status(item_code, item_entry.get()))
         item_button.pack(side="left")
 
+        # Button - Mark as returned
+        item_button = ck.CTkButton(actions_frame, text="Item foi devolvido",
+                                   command=lambda: self._change_item_status(item_code, item_entry.get()))
+        item_button.pack(side="left", padx=(0, 5))
+
+        # Button to cancel item
+        cancel_button = ck.CTkButton(actions_frame, text="✕", width=30,
+                                     fg_color="red", hover_color="#990000",
+                                     command=lambda: self._cancel_item_ad(item_code))
+        cancel_button.pack(side="left")
+
         self.item_frames.append(item_frame)
 
     def clear_items(self):
@@ -60,6 +71,20 @@ class FoundItemsListBox(ck.CTkScrollableFrame):
         
         else:
             messagebox.showerror("Erro", "Não foi possível marcar o item como encontrado. Verifique se o e-mail do dono está correto.")
+
+    def _cancel_item_ad(self, item_code):
+        itemService = ItemService()
+        itemMarkedRemoved = itemService.remove_item(item_code)
+        if itemMarkedRemoved:
+            messagebox.showinfo("Sucesso", "Item removido com sucesso!")
+            # Update the session and frame
+            self.frame.session.initialize_session(self.frame.session.user_codu)
+            self.frame.update_frame(self.frame.session)
+            self.frame.master.recreate_admin_frame()
+        
+        else:
+            messagebox.showerror("Erro", "Não foi possível remover o item.")
+
 
         
 
