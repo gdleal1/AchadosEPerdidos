@@ -18,6 +18,11 @@ Sistema de achados e perdidos voltado à população no geral. O objetivo é per
 ### 2. Diagrama de Sequência para o Caso de Uso Anunciar item encontrado
 ![Screenshot From 2025-06-22 13-16-38](https://github.com/user-attachments/assets/d417705f-7700-4e8e-a810-48de95131fd4)
 
+## Diagrama de Classes
+![image](https://github.com/user-attachments/assets/e0f768c1-b25c-4cf8-a932-83b4820a81e2)
+
+
+
 
 
 
