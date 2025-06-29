@@ -21,6 +21,44 @@ Sistema de achados e perdidos voltado à população no geral. O objetivo é per
 ## Diagrama de Classes
 ![image](https://github.com/user-attachments/assets/e0f768c1-b25c-4cf8-a932-83b4820a81e2)
 
+# 🖥️ Interface
+<h2 align="center">Tela de login/registro e Tela de busca</h2>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/181893a1-bcb0-440c-a6fc-bfb067dce134" width="45%"/>
+  <img src="https://github.com/user-attachments/assets/0a4cb94f-8860-4e23-b9b2-a911be5f9a73" width="45%"/>
+</p>
+
+<h2 align="center">Tela do item e Tela do usuário</h2>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/a6bcfc5b-0dd8-494f-ab32-def96af302e8" width="45%"/>
+  <img src="https://github.com/user-attachments/assets/506dc23b-1bdc-4fa8-9584-71271d1a91d1" width="45%"/>
+</p>
+
+<h2 align="center">Tela de anúncio e Tela de denúncia</h2>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/eb3d6d22-72b8-4d65-a957-11139acaa798" width="45%"/>
+  <img src="https://github.com/user-attachments/assets/cda95a5a-b1e9-48dc-bfe1-b84c335ed4c2" width="45%"/>
+</p>
+
+<h2 align="center">Tela do administrador</h2>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/7fbaabbe-3a7f-4183-8d34-214ce94c40ef" width="45%"/>
+</p>
+
+
+
+
+
+
+
+
+
+
+
 
 
 
